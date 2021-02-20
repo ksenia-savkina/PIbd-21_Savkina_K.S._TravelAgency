@@ -28,9 +28,11 @@ namespace TravelAgencyView
             currentContainer.RegisterType<IComponentStorage, ComponentStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<IOrderStorage, OrderStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ITravelStorage, TravelStorage>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IStoreHouseStorage, StoreHouseStorage>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ComponentLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<OrderLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<TravelLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<StoreHouseLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
