@@ -82,7 +82,7 @@ namespace TravelAgencyFileImplement
                         TravelId = Convert.ToInt32(elem.Element("TravelId").Value),
                         Count = Convert.ToInt32(elem.Element("Count").Value),
                         Sum = Convert.ToDecimal(elem.Element("Sum").Value),
-                        Status = (OrderStatus)Enum.Parse(typeof(OrderStatus), elem.Element("Status").Value, true),
+                        Status = (OrderStatus)Convert.ToInt32(elem.Element("Status").Value),
                         DateCreate = Convert.ToDateTime(elem.Element("DateCreate").Value),
                         DateImplement = String.IsNullOrEmpty(elem.Element("DateImplement").Value) ? DateTime.MinValue : Convert.ToDateTime(elem.Element("DateImplement").Value),
                     });
@@ -145,7 +145,7 @@ namespace TravelAgencyFileImplement
                     new XElement("TravelId", order.TravelId),
                     new XElement("Count", order.Count),
                     new XElement("Sum", order.Sum),
-                    new XElement("Status", order.Status),
+                    new XElement("Status", (int)order.Status),
                     new XElement("DateCreate", order.DateCreate),
                     new XElement("DateImplement", order.DateImplement)));
                 }

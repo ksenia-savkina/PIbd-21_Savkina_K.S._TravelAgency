@@ -31,7 +31,7 @@ namespace TravelAgencyFileImplement.Implements
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.DateCreate.Equals(model.DateCreate))
+            .Where(rec => rec.DateCreate == model.DateCreate)
             .Select(CreateModel)
             .ToList();
         }
@@ -90,19 +90,15 @@ namespace TravelAgencyFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            string travelName = null;
-            foreach (var travel in source.Travels)
-            {
-                if (travel.Id == order.TravelId)
-                {
-                    travelName = travel.TravelName;
-                }
-            }
+            var tmp = source.Travels.FirstOrDefault(t => t.Id == order.TravelId)?.TravelName;
+            tmp = "";
+            var tmp1 = order.TravelId;
+            tmp1 = 0;
             return new OrderViewModel
             {
                 Id = order.Id,
                 TravelId = order.TravelId,
-                TravelName = travelName,
+                TravelName = source.Travels.FirstOrDefault(t => t.Id == order.TravelId)?.TravelName,
                 Count = order.Count,
                 Sum = order.Sum,
                 Status = order.Status,
