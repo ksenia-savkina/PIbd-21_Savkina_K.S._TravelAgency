@@ -90,10 +90,6 @@ namespace TravelAgencyFileImplement.Implements
 
         private OrderViewModel CreateModel(Order order)
         {
-            var tmp = source.Travels.FirstOrDefault(t => t.Id == order.TravelId)?.TravelName;
-            tmp = "";
-            var tmp1 = order.TravelId;
-            tmp1 = 0;
             return new OrderViewModel
             {
                 Id = order.Id,

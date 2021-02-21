@@ -49,7 +49,7 @@ namespace TravelAgencyFileImplement.Implements
 
         public void Insert(TravelBindingModel model)
         {
-            int maxId = source.Travels.Count > 0 ? source.Components.Max(rec => rec.Id) : 0;
+            int maxId = source.Travels.Count > 0 ? source.Travels.Max(rec => rec.Id) : 0;
             var element = new Travel { Id = maxId + 1, TravelComponents = new Dictionary<int, int>() };
             source.Travels.Add(CreateModel(model, element));
         }
