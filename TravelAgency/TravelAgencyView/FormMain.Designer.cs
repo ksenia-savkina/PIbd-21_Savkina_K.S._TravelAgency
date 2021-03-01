@@ -38,6 +38,8 @@
 			this.справочникиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.компонентыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.туристическиеПутёвкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.складыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.пополнениеСкладаToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
 			this.menuStrip.SuspendLayout();
 			this.SuspendLayout();
@@ -45,7 +47,7 @@
 			// buttonRef
 			// 
 			this.buttonRef.Location = new System.Drawing.Point(682, 337);
-			this.buttonRef.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonRef.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonRef.Name = "buttonRef";
 			this.buttonRef.Size = new System.Drawing.Size(141, 24);
 			this.buttonRef.TabIndex = 13;
@@ -56,7 +58,7 @@
 			// buttonPayOrder
 			// 
 			this.buttonPayOrder.Location = new System.Drawing.Point(682, 275);
-			this.buttonPayOrder.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonPayOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonPayOrder.Name = "buttonPayOrder";
 			this.buttonPayOrder.Size = new System.Drawing.Size(141, 24);
 			this.buttonPayOrder.TabIndex = 12;
@@ -67,7 +69,7 @@
 			// buttonOrderReady
 			// 
 			this.buttonOrderReady.Location = new System.Drawing.Point(682, 209);
-			this.buttonOrderReady.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonOrderReady.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonOrderReady.Name = "buttonOrderReady";
 			this.buttonOrderReady.Size = new System.Drawing.Size(141, 24);
 			this.buttonOrderReady.TabIndex = 11;
@@ -78,7 +80,7 @@
 			// buttonTakeOrderInWork
 			// 
 			this.buttonTakeOrderInWork.Location = new System.Drawing.Point(682, 150);
-			this.buttonTakeOrderInWork.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonTakeOrderInWork.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonTakeOrderInWork.Name = "buttonTakeOrderInWork";
 			this.buttonTakeOrderInWork.Size = new System.Drawing.Size(141, 24);
 			this.buttonTakeOrderInWork.TabIndex = 10;
@@ -89,7 +91,7 @@
 			// buttonCreateOrder
 			// 
 			this.buttonCreateOrder.Location = new System.Drawing.Point(682, 93);
-			this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonCreateOrder.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonCreateOrder.Name = "buttonCreateOrder";
 			this.buttonCreateOrder.Size = new System.Drawing.Size(141, 24);
 			this.buttonCreateOrder.TabIndex = 9;
@@ -99,9 +101,10 @@
 			// 
 			// dataGridView
 			// 
+			this.dataGridView.AllowUserToAddRows = false;
 			this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
 			this.dataGridView.Location = new System.Drawing.Point(0, 26);
-			this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
+			this.dataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.dataGridView.Name = "dataGridView";
 			this.dataGridView.ReadOnly = true;
 			this.dataGridView.RowHeadersVisible = false;
@@ -115,7 +118,8 @@
 			// 
 			this.menuStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
 			this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.справочникиToolStripMenuItem});
+            this.справочникиToolStripMenuItem,
+            this.пополнениеСкладаToolStripMenuItem});
 			this.menuStrip.Location = new System.Drawing.Point(0, 0);
 			this.menuStrip.Name = "menuStrip";
 			this.menuStrip.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -127,7 +131,8 @@
 			// 
 			this.справочникиToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.компонентыToolStripMenuItem,
-            this.туристическиеПутёвкиToolStripMenuItem});
+            this.туристическиеПутёвкиToolStripMenuItem,
+            this.складыToolStripMenuItem});
 			this.справочникиToolStripMenuItem.Name = "справочникиToolStripMenuItem";
 			this.справочникиToolStripMenuItem.Size = new System.Drawing.Size(94, 20);
 			this.справочникиToolStripMenuItem.Text = "Справочники";
@@ -145,6 +150,20 @@
 			this.туристическиеПутёвкиToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
 			this.туристическиеПутёвкиToolStripMenuItem.Text = "Туристические путёвки";
 			this.туристическиеПутёвкиToolStripMenuItem.Click += new System.EventHandler(this.туристическиеПутёвкиToolStripMenuItem_Click);
+			// 
+			// складыToolStripMenuItem
+			// 
+			this.складыToolStripMenuItem.Name = "складыToolStripMenuItem";
+			this.складыToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+			this.складыToolStripMenuItem.Text = "Склады";
+			this.складыToolStripMenuItem.Click += new System.EventHandler(this.складыToolStripMenuItem_Click);
+			// 
+			// пополнениеСкладаToolStripMenuItem
+			// 
+			this.пополнениеСкладаToolStripMenuItem.Name = "пополнениеСкладаToolStripMenuItem";
+			this.пополнениеСкладаToolStripMenuItem.Size = new System.Drawing.Size(129, 20);
+			this.пополнениеСкладаToolStripMenuItem.Text = "Пополнение склада";
+			this.пополнениеСкладаToolStripMenuItem.Click += new System.EventHandler(this.пополнениеСкладаToolStripMenuItem_Click);
 			// 
 			// FormMain
 			// 
@@ -181,5 +200,7 @@
 		private System.Windows.Forms.ToolStripMenuItem справочникиToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem компонентыToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem туристическиеПутёвкиToolStripMenuItem;
-	}
+        private System.Windows.Forms.ToolStripMenuItem складыToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem пополнениеСкладаToolStripMenuItem;
+    }
 }

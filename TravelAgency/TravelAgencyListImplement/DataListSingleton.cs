@@ -13,11 +13,14 @@ namespace TravelAgencyListImplement
 
         public List<Travel> Travels { get; set; }
 
+        public List<StoreHouse> StoreHouses { get; set; }
+
         private DataListSingleton()
         {
             Components = new List<Component>();
             Orders = new List<Order>();
             Travels = new List<Travel>();
+            StoreHouses = new List<StoreHouse>();
         }
 
         public static DataListSingleton GetInstance()
