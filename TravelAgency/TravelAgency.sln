@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyBusinessLogic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyListImplement", "TravelAgencyListImplement\TravelAgencyListImplement.csproj", "{1D7AD011-01EB-46D0-9AE1-4B35D666EAAE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelAgencyFileImplement", "TravelAgencyFileImplement\TravelAgencyFileImplement.csproj", "{F57B0694-2880-4310-B4E6-F0346BA13827}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyFileImplement", "TravelAgencyFileImplement\TravelAgencyFileImplement.csproj", "{F57B0694-2880-4310-B4E6-F0346BA13827}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelAgencyDatabaseImplement", "TravelAgencyDatabaseImplement\TravelAgencyDatabaseImplement.csproj", "{23FC9D74-6A15-46E8-8726-0FB82FF37FE3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{F57B0694-2880-4310-B4E6-F0346BA13827}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F57B0694-2880-4310-B4E6-F0346BA13827}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F57B0694-2880-4310-B4E6-F0346BA13827}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23FC9D74-6A15-46E8-8726-0FB82FF37FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23FC9D74-6A15-46E8-8726-0FB82FF37FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23FC9D74-6A15-46E8-8726-0FB82FF37FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23FC9D74-6A15-46E8-8726-0FB82FF37FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
