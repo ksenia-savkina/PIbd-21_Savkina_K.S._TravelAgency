@@ -77,8 +77,23 @@ namespace TravelAgencyFileImplement.Implements
             }
         }
 
-        public void СheckAndWriteOff(StoreHouseBindingModel model, int count, string compName)
+        public void WriteOff(StoreHouseBindingModel model, int count, string compName)
         {
+            foreach (var storeHouse in GetFullList())
+            {
+                //var element = storeHouse.StoreHouseComponents.FirstOrDefault(recPC =>
+                //(source.Components.FirstOrDefault(recC => recC.Id == recPC.Key)?.ComponentName == compName));
+                //if (element != null)
+                //{
+                //    k += storeHouse.StoreHouseComponents.Keys ;
+                //}
+                foreach (var component in storeHouse.StoreHouseComponents)
+                {
+                    if (storeHouse.StoreHouseComponents.ContainsKey(component.Key))
+                    {
+                    }                 
+                }
+            }
         }
 
         private StoreHouse CreateModel(StoreHouseBindingModel model, StoreHouse storeHouse)
