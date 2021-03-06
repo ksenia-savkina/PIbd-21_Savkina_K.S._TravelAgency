@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
@@ -89,8 +90,10 @@ namespace TravelAgencyDatabaseImplement.Implements
                 {
                     try
                     {
-                        context.Travels.Add(CreateModel(model, new Travel(), context));
+                        Travel travel = CreateModel(model, new Travel());
+                        context.Travels.Add(travel);
                         context.SaveChanges();
+                        travel = CreateModel(model, travel, context);
                         transaction.Commit();
                     }
                     catch
@@ -145,18 +148,25 @@ namespace TravelAgencyDatabaseImplement.Implements
             }
         }
 
+        private Travel CreateModel(TravelBindingModel model, Travel Travel)
+        {
+            Travel.TravelName = model.TravelName;
+            Travel.Price = model.Price;
+            return Travel;
+        }
+
         private Travel CreateModel(TravelBindingModel model, Travel travel, TravelAgencyDatabase context)
         {
             travel.TravelName = model.TravelName;
             travel.Price = model.Price;
             if (model.Id.HasValue)
             {
-                var TravelComponents = context.TravelComponents.Where(rec => rec.TravelId == model.Id.Value).ToList();
+                var travelComponents = context.TravelComponents.Where(rec => rec.TravelId == model.Id.Value).ToList();
                 // удалили те, которых нет в модели
-                context.TravelComponents.RemoveRange(TravelComponents.Where(rec => !model.TravelComponents.ContainsKey(rec.ComponentId)).ToList());
+                context.TravelComponents.RemoveRange(travelComponents.Where(rec => !model.TravelComponents.ContainsKey(rec.ComponentId)).ToList());
                 context.SaveChanges();
                 // обновили количество у существующих записей
-                foreach (var updateComponent in TravelComponents)
+                foreach (var updateComponent in travelComponents)
                 {
                     updateComponent.Count = model.TravelComponents[updateComponent.ComponentId].Item2;
                     model.TravelComponents.Remove(updateComponent.ComponentId);
@@ -172,7 +182,14 @@ namespace TravelAgencyDatabaseImplement.Implements
                     ComponentId = tc.Key,
                     Count = tc.Value.Item2
                 });
-                context.SaveChanges();
+                try
+                {
+                    context.SaveChanges();
+                }
+                catch (DbUpdateException e)
+                {
+                    MessageBox.Show(e?.InnerException?.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             return travel;
         }

@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
@@ -20,7 +19,7 @@ namespace TravelAgencyDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     TravelId = rec.TravelId,
-                    TravelName = context.Travels.FirstOrDefault(t => t.Id == rec.TravelId)?.TravelName,
+                    TravelName = context.Travels.FirstOrDefault(t => t.Id == rec.TravelId).TravelName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
@@ -45,7 +44,7 @@ namespace TravelAgencyDatabaseImplement.Implements
                 {
                     Id = rec.Id,
                     TravelId = rec.TravelId,
-                    TravelName = context.Travels.FirstOrDefault(t => t.Id == rec.TravelId)?.TravelName,
+                    TravelName = context.Travels.FirstOrDefault(t => t.Id == rec.TravelId).TravelName,
                     Count = rec.Count,
                     Sum = rec.Sum,
                     Status = rec.Status,
