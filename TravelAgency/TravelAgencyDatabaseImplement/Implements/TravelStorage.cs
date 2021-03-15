@@ -65,17 +65,17 @@ namespace TravelAgencyDatabaseImplement.Implements
             }
             using (var context = new TravelAgencyDatabase())
             {
-                var Travel = context.Travels
+                var travel = context.Travels
                 .Include(rec => rec.TravelComponents)
                 .ThenInclude(rec => rec.Component)
                 .FirstOrDefault(rec => rec.TravelName == model.TravelName || rec.Id == model.Id);
-                return Travel != null ?
+                return travel != null ?
                 new TravelViewModel
                 {
-                    Id = Travel.Id,
-                    TravelName = Travel.TravelName,
-                    Price = Travel.Price,
-                    TravelComponents = Travel.TravelComponents
+                    Id = travel.Id,
+                    TravelName = travel.TravelName,
+                    Price = travel.Price,
+                    TravelComponents = travel.TravelComponents
                     .ToDictionary(recTC => recTC.ComponentId, recTC => (recTC.Component?.ComponentName, recTC.Count))
                 } :
                 null;
