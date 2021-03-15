@@ -17,5 +17,7 @@ namespace TravelAgencyBusinessLogic.Interfaces
         void Update(StoreHouseBindingModel model);
 
         void Delete(StoreHouseBindingModel model);
+
+        bool WriteOff(int count, Dictionary<int, (string, int)> shComponents);
     }
 }

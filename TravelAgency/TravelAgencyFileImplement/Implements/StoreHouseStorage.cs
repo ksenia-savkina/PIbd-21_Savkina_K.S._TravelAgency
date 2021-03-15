@@ -77,23 +77,44 @@ namespace TravelAgencyFileImplement.Implements
             }
         }
 
-        public void WriteOff(StoreHouseBindingModel model, int count, string compName)
+        public bool WriteOff(int count, Dictionary<int, (string, int)> shComponents)
         {
-            foreach (var storeHouse in GetFullList())
+            foreach (var storeHouseComponent in shComponents)
             {
-                //var element = storeHouse.StoreHouseComponents.FirstOrDefault(recPC =>
-                //(source.Components.FirstOrDefault(recC => recC.Id == recPC.Key)?.ComponentName == compName));
-                //if (element != null)
-                //{
-                //    k += storeHouse.StoreHouseComponents.Keys ;
-                //}
-                foreach (var component in storeHouse.StoreHouseComponents)
+                int countAvailable = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(storeHouseComponent.Key))
+                    .Sum(store => store.StoreHouseComponents[storeHouseComponent.Key]);
+
+                if (countAvailable < storeHouseComponent.Value.Item2 * count)
                 {
-                    if (storeHouse.StoreHouseComponents.ContainsKey(component.Key))
-                    {
-                    }                 
+                    return false;
                 }
             }
+
+            foreach (var storeHouseComponent in shComponents)
+            {
+                int countAvailable = storeHouseComponent.Value.Item2 * count;
+                IEnumerable<StoreHouse> storeHouses = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(storeHouseComponent.Key));
+
+                foreach (StoreHouse storeHouse in storeHouses)
+                {
+                    if (storeHouse.StoreHouseComponents[storeHouseComponent.Key] <= countAvailable)
+                    {
+                        countAvailable -= storeHouse.StoreHouseComponents[storeHouseComponent.Key];
+                        storeHouse.StoreHouseComponents.Remove(storeHouseComponent.Key);
+                    }
+                    else
+                    {
+                        storeHouse.StoreHouseComponents[storeHouseComponent.Key] -= countAvailable;
+                        countAvailable = 0;
+                    }
+
+                    if (countAvailable == 0)
+                    {
+                        break;
+                    }
+                }
+            }
+            return true;
         }
 
         private StoreHouse CreateModel(StoreHouseBindingModel model, StoreHouse storeHouse)
@@ -132,8 +153,8 @@ namespace TravelAgencyFileImplement.Implements
                 StoreHouseName = storeHouse.StoreHouseName,
                 ResponsiblePersonFullName = storeHouse.ResponsiblePersonFullName,
                 DateCreate = storeHouse.DateCreate,
-                StoreHouseComponents = storeHouse.StoreHouseComponents.ToDictionary(recPC => recPC.Key, recPC =>
-                (source.Components.FirstOrDefault(recC => recC.Id == recPC.Key)?.ComponentName, recPC.Value))
+                StoreHouseComponents = storeHouse.StoreHouseComponents.ToDictionary(recSC => recSC.Key, recSC =>
+                (source.Components.FirstOrDefault(recC => recC.Id == recSC.Key)?.ComponentName, recSC.Value))
             };
         }
     }
