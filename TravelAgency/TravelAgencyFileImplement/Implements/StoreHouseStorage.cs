@@ -50,7 +50,7 @@ namespace TravelAgencyFileImplement.Implements
         public void Insert(StoreHouseBindingModel model)
         {
             int maxId = source.StoreHouses.Count > 0 ? source.StoreHouses.Max(rec => rec.Id) : 0;
-            var element = new StoreHouse { Id = maxId + 1, StoreHouseComponents = new Dictionary<int, int>() };
+            var element = new StoreHouse { Id = maxId + 1, StoreHouseComponents = new Dictionary<int, int>(), DateCreate = DateTime.Now };
             source.StoreHouses.Add(CreateModel(model, element));
         }
 
@@ -121,7 +121,6 @@ namespace TravelAgencyFileImplement.Implements
         {
             storeHouse.StoreHouseName = model.StoreHouseName;
             storeHouse.ResponsiblePersonFullName = model.ResponsiblePersonFullName;
-            storeHouse.DateCreate = model.DateCreate;
             // удаляем убранные
             foreach (var key in storeHouse.StoreHouseComponents.Keys.ToList())
             {
