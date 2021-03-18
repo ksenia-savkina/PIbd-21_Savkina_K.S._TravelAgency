@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
@@ -15,6 +16,7 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 return context.Orders
+                .Include(rec => rec.Travel)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -40,6 +42,8 @@ namespace TravelAgencyDatabaseImplement.Implements
             {
                 return context.Orders
                 .Where(rec => rec.DateCreate == model.DateCreate)
+                .Include(rec => rec.Travel)
+                .Where(rec => rec.TravelId == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -64,6 +68,7 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 var order = context.Orders
+                .Include(rec => rec.Travel)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel

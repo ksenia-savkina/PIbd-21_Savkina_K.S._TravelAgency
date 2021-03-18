@@ -10,6 +10,8 @@ namespace TravelAgencyDatabaseImplement.Models
 
         public int TravelId { get; set; }
 
+        public virtual Travel Travel { get; set; }
+
         [Required]
         public int Count { get; set; }
 
