@@ -33,6 +33,17 @@ namespace TravelAgencyListImplement.Implements
                 return null;
             }
             List<OrderViewModel> result = new List<OrderViewModel>();
+            if (model.DateFrom != null && model.DateTo != null)
+            {
+                foreach (var order in source.Orders)
+                {
+                    if (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo)
+                    {
+                        result.Add(CreateModel(order));
+                    }
+                }
+                return result;
+            }
             foreach (var order in source.Orders)
             {
                 if (order.DateCreate.Equals(model.DateCreate))

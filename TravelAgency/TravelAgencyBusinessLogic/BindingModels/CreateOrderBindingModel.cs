@@ -1,4 +1,6 @@
-﻿namespace TravelAgencyBusinessLogic.BindingModels
+﻿using System;
+
+namespace TravelAgencyBusinessLogic.BindingModels
 {
     /// <summary>
     /// Данные от клиента, для создания заказа
