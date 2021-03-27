@@ -77,38 +77,30 @@ namespace TravelAgencyFileImplement.Implements
             }
         }
 
-        public bool WriteOff(int count, Dictionary<int, (string, int)> shComponents)
+        public bool WriteOff(int count, Dictionary<int, (string, int)> travelComponents)
         {
-            foreach (var storeHouseComponent in shComponents)
+            foreach (var travelComponent in travelComponents)
             {
-                int countAvailable = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(storeHouseComponent.Key))
-                    .Sum(store => store.StoreHouseComponents[storeHouseComponent.Key]);
-
-                if (countAvailable < storeHouseComponent.Value.Item2 * count)
+                IEnumerable<StoreHouse> storeHouses = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(travelComponent.Key));
+                int countAvailable = storeHouses.Sum(store => store.StoreHouseComponents[travelComponent.Key]);
+                int countRequired = travelComponent.Value.Item2 * count;
+                if (countAvailable < countRequired)
                 {
                     return false;
                 }
-            }
-
-            foreach (var storeHouseComponent in shComponents)
-            {
-                int countAvailable = storeHouseComponent.Value.Item2 * count;
-                IEnumerable<StoreHouse> storeHouses = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(storeHouseComponent.Key));
-
                 foreach (StoreHouse storeHouse in storeHouses)
                 {
-                    if (storeHouse.StoreHouseComponents[storeHouseComponent.Key] <= countAvailable)
+                    if (storeHouse.StoreHouseComponents[travelComponent.Key] <= countRequired)
                     {
-                        countAvailable -= storeHouse.StoreHouseComponents[storeHouseComponent.Key];
-                        storeHouse.StoreHouseComponents.Remove(storeHouseComponent.Key);
+                        countRequired -= storeHouse.StoreHouseComponents[travelComponent.Key];
+                        storeHouse.StoreHouseComponents.Remove(travelComponent.Key);
                     }
                     else
                     {
-                        storeHouse.StoreHouseComponents[storeHouseComponent.Key] -= countAvailable;
-                        countAvailable = 0;
+                        storeHouse.StoreHouseComponents[travelComponent.Key] -= countRequired;
+                        countRequired = 0;
                     }
-
-                    if (countAvailable == 0)
+                    if (countRequired == 0)
                     {
                         break;
                     }
