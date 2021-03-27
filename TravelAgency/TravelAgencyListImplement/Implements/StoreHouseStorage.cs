@@ -175,7 +175,7 @@ namespace TravelAgencyListImplement.Implements
             }
         }
 
-        public bool WriteOff(int count, Dictionary<int, (string, int)> shComponents)
+        public bool WriteOff(int count, Dictionary<int, (string, int)> travelComponents)
         {
             throw new NotImplementedException();
         }
