@@ -159,19 +159,19 @@ namespace TravelAgencyFileImplement
             if (Travels != null)
             {
                 var xElement = new XElement("Travels");
-                foreach (var Travel in Travels)
+                foreach (var travel in Travels)
                 {
                     var compElement = new XElement("TravelComponents");
-                    foreach (var component in Travel.TravelComponents)
+                    foreach (var component in travel.TravelComponents)
                     {
                         compElement.Add(new XElement("TravelComponent",
                         new XElement("Key", component.Key),
                         new XElement("Value", component.Value)));
                     }
                     xElement.Add(new XElement("Travel",
-                    new XAttribute("Id", Travel.Id),
-                    new XElement("TravelName", Travel.TravelName),
-                    new XElement("Price", Travel.Price),
+                    new XAttribute("Id", travel.Id),
+                    new XElement("TravelName", travel.TravelName),
+                    new XElement("Price", travel.Price),
                     compElement));
                 }
                 XDocument xDocument = new XDocument(xElement);
