@@ -14,9 +14,9 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
         private readonly IComponentStorage _componentStorage;
         private readonly ITravelStorage _travelStorage;
         private readonly IOrderStorage _orderStorage;
-        public ReportLogic(ITravelStorage productStorage, IComponentStorage componentStorage, IOrderStorage orderStorage)
+        public ReportLogic(ITravelStorage travelStorage, IComponentStorage componentStorage, IOrderStorage orderStorage)
         {
-            _travelStorage = productStorage;
+            _travelStorage = travelStorage;
             _componentStorage = componentStorage;
             _orderStorage = orderStorage;
         }
