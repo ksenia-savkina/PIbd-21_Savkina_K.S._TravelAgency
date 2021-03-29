@@ -81,13 +81,17 @@ namespace TravelAgencyFileImplement.Implements
         {
             foreach (var travelComponent in travelComponents)
             {
-                IEnumerable<StoreHouse> storeHouses = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(travelComponent.Key));
-                int countAvailable = storeHouses.Sum(store => store.StoreHouseComponents[travelComponent.Key]);
-                int countRequired = travelComponent.Value.Item2 * count;
-                if (countAvailable < countRequired)
+                int countAvailable = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(travelComponent.Key))
+                .Sum(store => store.StoreHouseComponents[travelComponent.Key]);
+                if (countAvailable < travelComponent.Value.Item2 * count)
                 {
                     return false;
                 }
+            }
+            foreach (var travelComponent in travelComponents)
+            {
+                IEnumerable<StoreHouse> storeHouses = source.StoreHouses.Where(store => store.StoreHouseComponents.ContainsKey(travelComponent.Key));
+                int countRequired = travelComponent.Value.Item2 * count;
                 foreach (StoreHouse storeHouse in storeHouses)
                 {
                     if (storeHouse.StoreHouseComponents[travelComponent.Key] <= countRequired)
