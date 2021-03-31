@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
@@ -16,7 +15,6 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 return context.Orders
-                .Include(rec => rec.Travel)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -38,32 +36,10 @@ namespace TravelAgencyDatabaseImplement.Implements
             {
                 return null;
             }
-            if (model.DateFrom != null && model.DateTo != null)
-            {
-                using (var context = new TravelAgencyDatabase())
-                {
-                    return context.Orders
-                    .Where(rec => rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo)
-                    .Select(rec => new OrderViewModel
-                    {
-                        Id = rec.Id,
-                        TravelId = rec.TravelId,
-                        TravelName = context.Travels.FirstOrDefault(t => t.Id == rec.TravelId).TravelName,
-                        Count = rec.Count,
-                        Sum = rec.Sum,
-                        Status = rec.Status,
-                        DateCreate = rec.DateCreate,
-                        DateImplement = rec.DateImplement
-                    })
-                    .ToList();
-                }
-            }
             using (var context = new TravelAgencyDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.DateCreate == model.DateCreate)
-                .Include(rec => rec.Travel)
-                .Where(rec => rec.TravelId == model.Id)
+                .Where(rec => rec.DateCreate == model.DateCreate || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -88,7 +64,6 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 var order = context.Orders
-                .Include(rec => rec.Travel)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel

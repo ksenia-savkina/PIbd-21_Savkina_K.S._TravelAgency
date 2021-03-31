@@ -127,7 +127,7 @@ namespace TravelAgencyView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveComponentsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    report.SaveTravelsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

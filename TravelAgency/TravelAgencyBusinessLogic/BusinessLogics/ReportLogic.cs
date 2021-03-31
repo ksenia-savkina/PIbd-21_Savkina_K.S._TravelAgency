@@ -11,13 +11,11 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
 {
     public class ReportLogic
     {
-        private readonly IComponentStorage _componentStorage;
         private readonly ITravelStorage _travelStorage;
         private readonly IOrderStorage _orderStorage;
-        public ReportLogic(ITravelStorage travelStorage, IComponentStorage componentStorage, IOrderStorage orderStorage)
+        public ReportLogic(ITravelStorage travelStorage, IOrderStorage orderStorage)
         {
             _travelStorage = travelStorage;
-            _componentStorage = componentStorage;
             _orderStorage = orderStorage;
         }
         /// <summary>
@@ -26,24 +24,20 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
         /// <returns></returns>
         public List<ReportTravelComponentViewModel> GetComponentTravel()
         {
-            var components = _componentStorage.GetFullList();
             var travels = _travelStorage.GetFullList();
             var list = new List<ReportTravelComponentViewModel>();
             foreach (var travel in travels)
-                {
+            {
                 var record = new ReportTravelComponentViewModel
                 {
                     TravelName = travel.TravelName,
                     Components = new List<Tuple<string, int>>(),
                     TotalCount = 0
                 };
-                foreach (var component in components)
+                foreach (var component in travel.TravelComponents)
                 {
-                    if (travel.TravelComponents.ContainsKey(component.Id))
-                    {
-                        record.Components.Add(new Tuple<string, int>(component.ComponentName, travel.TravelComponents[component.Id].Item2));
-                        record.TotalCount += travel.TravelComponents[component.Id].Item2;
-                    }
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
                 }
                 list.Add(record);
             }
@@ -71,7 +65,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
         /// Сохранение путёвок в файл-Word
         /// </summary>
         /// <param name="model"></param>
-        public void SaveComponentsToWordFile(ReportBindingModel model)
+        public void SaveTravelsToWordFile(ReportBindingModel model)
         {
             SaveToWord.CreateDoc(new WordInfo
             {
