@@ -43,7 +43,6 @@ namespace TravelAgencyDatabaseImplement.Implements
                 return context.Orders
                 .Where(rec => rec.DateCreate == model.DateCreate)
                 .Include(rec => rec.Travel)
-                .Where(rec => rec.TravelId == model.Id)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,

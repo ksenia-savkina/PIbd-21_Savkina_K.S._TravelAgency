@@ -5,10 +5,9 @@ using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
-using TravelAgencyDatabaseImplement;
 using TravelAgencyDatabaseImplement.Models;
 
-namespace StoreHouseAgencyDatabaseImplement.Implements
+namespace TravelAgencyDatabaseImplement.Implements
 {
     public class StoreHouseStorage : IStoreHouseStorage
     {
@@ -117,7 +116,7 @@ namespace StoreHouseAgencyDatabaseImplement.Implements
                         var element = context.StoreHouses.FirstOrDefault(rec => rec.Id == model.Id);
                         if (element == null)
                         {
-                            throw new Exception("Элемент не найден");
+                            throw new Exception("Склад не найден");
                         }
                         CreateModel(model, element, context);
                         context.SaveChanges();
