@@ -31,7 +31,9 @@ namespace TravelAgencyFileImplement.Implements
                 return null;
             }
             return source.Orders
-            .Where(rec => rec.DateCreate == model.DateCreate || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+            .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) || 
+            (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date) 
+            || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
             .Select(CreateModel)
             .ToList();
         }
@@ -85,6 +87,7 @@ namespace TravelAgencyFileImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = (int)model.ClientId;
             return order;
         }
 
@@ -99,7 +102,9 @@ namespace TravelAgencyFileImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFIO = source.Clients.FirstOrDefault(c => c.Id == order.ClientId)?.ClientFIO
             };
         }
     }

@@ -12,6 +12,10 @@ namespace TravelAgencyDatabaseImplement.Models
 
         public virtual Travel Travel { get; set; }
 
+        public int ClientId { get; set; }
+
+        public virtual Client Client { get; set; }
+
         [Required]
         public int Count { get; set; }
 

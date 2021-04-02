@@ -17,15 +17,18 @@ namespace TravelAgencyView
 
         private readonly OrderLogic _logicO;
 
+        private readonly ClientLogic _logicC;
+
         public int Id { set { id = value; } }
 
         private int? id;
 
-        public FormCreateOrder(TravelLogic logicT, OrderLogic logicO)
+        public FormCreateOrder(TravelLogic logicT, OrderLogic logicO, ClientLogic logicC)
         {
             InitializeComponent();
             _logicT = logicT;
             _logicO = logicO;
+            _logicC = logicC;
         }
 
         private void comboBoxTravel_SelectedIndexChanged(object sender, EventArgs e)
@@ -42,13 +45,21 @@ namespace TravelAgencyView
         {
             try
             {
-                List<TravelViewModel> list = _logicT.Read(null);
-                if (list != null)
+                List<TravelViewModel> listTravels = _logicT.Read(null);
+                List<ClientViewModel> listClients = _logicC.Read(null);
+                if (listTravels != null)
                 {
                     comboBoxTravel.DisplayMember = "TravelName";
                     comboBoxTravel.ValueMember = "Id";
-                    comboBoxTravel.DataSource = list;
+                    comboBoxTravel.DataSource = listTravels;
                     comboBoxTravel.SelectedItem = null;
+                }
+                if (listClients != null)
+                {
+                    comboBoxClient.DisplayMember = "ClientFIO";
+                    comboBoxClient.ValueMember = "Id";
+                    comboBoxClient.DataSource = listClients;
+                    comboBoxClient.SelectedItem = null;
                 }
             }
             catch (Exception ex)
@@ -87,10 +98,16 @@ namespace TravelAgencyView
                 MessageBox.Show("Выберите путёвку", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            if (comboBoxClient.SelectedValue == null)
+            {
+                MessageBox.Show("Выберите клиента", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
             try
             {
                 _logicO.CreateOrder(new CreateOrderBindingModel
                 {
+                    ClientId = Convert.ToInt32(comboBoxClient.SelectedValue),
                     TravelId = Convert.ToInt32(comboBoxTravel.SelectedValue),
                     Count = Convert.ToInt32(textBoxCount.Text),
                     Sum = Convert.ToDecimal(textBoxSum.Text)

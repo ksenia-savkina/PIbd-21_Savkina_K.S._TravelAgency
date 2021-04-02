@@ -53,6 +53,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             return _orderStorage.GetFilteredList(new OrderBindingModel { DateFrom = model.DateFrom, DateTo = model.DateTo })
             .Select(x => new ReportOrdersViewModel
             {
+                ClientFIO = x.ClientFIO,
                 DateCreate = x.DateCreate,
                 TravelName = x.TravelName,
                 Count = x.Count,

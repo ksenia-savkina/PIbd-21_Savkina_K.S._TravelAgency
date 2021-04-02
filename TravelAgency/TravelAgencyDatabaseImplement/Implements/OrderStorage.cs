@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
@@ -15,6 +16,8 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 return context.Orders
+                .Include(rec => rec.Travel)
+                .Include(rec => rec.Client)
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -24,7 +27,9 @@ namespace TravelAgencyDatabaseImplement.Implements
                     Sum = rec.Sum,
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
+                    DateImplement = rec.DateImplement,
+                    ClientId = rec.ClientId,
+                    ClientFIO = rec.Client.ClientFIO
                 })
                 .ToList();
             }
@@ -39,7 +44,11 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 return context.Orders
-                .Where(rec => rec.DateCreate == model.DateCreate || (rec.DateCreate >= model.DateFrom && rec.DateCreate <= model.DateTo))
+                .Include(rec => rec.Travel)
+                .Include(rec => rec.Client)
+                .Where(rec => (!model.DateFrom.HasValue && !model.DateTo.HasValue && rec.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && rec.DateCreate.Date >= model.DateFrom.Value.Date && rec.DateCreate.Date <= model.DateTo.Value.Date)
+                || (model.ClientId.HasValue && rec.ClientId == model.ClientId))
                 .Select(rec => new OrderViewModel
                 {
                     Id = rec.Id,
@@ -49,7 +58,9 @@ namespace TravelAgencyDatabaseImplement.Implements
                     Sum = rec.Sum,
                     Status = rec.Status,
                     DateCreate = rec.DateCreate,
-                    DateImplement = rec.DateImplement
+                    DateImplement = rec.DateImplement,
+                    ClientId = rec.ClientId,
+                    ClientFIO = rec.Client.ClientFIO
                 })
                 .ToList();
             }
@@ -64,6 +75,8 @@ namespace TravelAgencyDatabaseImplement.Implements
             using (var context = new TravelAgencyDatabase())
             {
                 var order = context.Orders
+                .Include(rec => rec.Travel)
+                .Include(rec => rec.Client)
                 .FirstOrDefault(rec => rec.Id == model.Id);
                 return order != null ?
                 new OrderViewModel
@@ -75,7 +88,9 @@ namespace TravelAgencyDatabaseImplement.Implements
                     Sum = order.Sum,
                     Status = order.Status,
                     DateCreate = order.DateCreate,
-                    DateImplement = order.DateImplement
+                    DateImplement = order.DateImplement,
+                    ClientId = order.ClientId,
+                    ClientFIO = order.Client.ClientFIO
                 } :
                 null;
             }
@@ -129,6 +144,7 @@ namespace TravelAgencyDatabaseImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = (int)model.ClientId;
             return order;
         }
     }

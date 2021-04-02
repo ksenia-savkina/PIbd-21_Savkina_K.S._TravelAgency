@@ -30,7 +30,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             CreateRow(new PdfRowParameters
             {
                 Table = table,
-                Texts = new List<string> { "Дата заказа", "Путёвка", "Количество", "Сумма", "Статус" },
+                Texts = new List<string> { "Клиент", "Дата заказа", "Путёвка", "Количество", "Сумма", "Статус" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
@@ -39,7 +39,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 CreateRow(new PdfRowParameters
                 {
                     Table = table,
-                    Texts = new List<string> { order.DateCreate.ToShortDateString(), order.TravelName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
+                    Texts = new List<string> { order.ClientFIO, order.DateCreate.ToShortDateString(), order.TravelName, order.Count.ToString(), order.Sum.ToString(), order.Status.ToString() },
                     Style = "Normal",
                     ParagraphAlignment = ParagraphAlignment.Left
                 });

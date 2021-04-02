@@ -1,10 +1,11 @@
 ﻿using System;
-using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
     public class ReportOrdersViewModel
     {
+        public string ClientFIO { get; set; }
+
         public DateTime DateCreate { get; set; }
 
         public string TravelName { get; set; }

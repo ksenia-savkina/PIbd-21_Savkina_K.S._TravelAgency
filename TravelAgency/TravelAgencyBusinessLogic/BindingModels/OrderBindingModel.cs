@@ -10,6 +10,8 @@ namespace TravelAgencyBusinessLogic.BindingModels
     {
         public int? Id { get; set; }
 
+        public int? ClientId { get; set; }
+
         public int TravelId { get; set; }
 
         public int Count { get; set; }

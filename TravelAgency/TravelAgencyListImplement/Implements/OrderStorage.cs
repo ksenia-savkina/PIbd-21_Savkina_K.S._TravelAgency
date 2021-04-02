@@ -35,7 +35,9 @@ namespace TravelAgencyListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate.Equals(model.DateCreate) || (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo))
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) || 
+                    (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date)
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -110,17 +112,26 @@ namespace TravelAgencyListImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
+            order.ClientId = (int)model.ClientId;
             return order;
         }
 
         private OrderViewModel CreateModel(Order order)
         {
             string travelName = null;
+            string clientFIO = null;
             foreach (var travel in source.Travels)
             {
                 if (travel.Id == order.TravelId)
                 {
                     travelName = travel.TravelName;
+                }
+            }
+            foreach (var client in source.Clients)
+            {
+                if (client.Id == order.ClientId)
+                {
+                    clientFIO = client.ClientFIO;
                 }
             }
             return new OrderViewModel
@@ -132,7 +143,9 @@ namespace TravelAgencyListImplement.Implements
                 Sum = order.Sum,
                 Status = order.Status,
                 DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement
+                DateImplement = order.DateImplement,
+                ClientId = order.ClientId,
+                ClientFIO = clientFIO
             };
         }
     }
