@@ -27,7 +27,7 @@ namespace TravelAgencyListImplement.Implements
         }
 
         public List<OrderViewModel> GetFilteredList(OrderBindingModel model)
-        {
+        {  
             if (model == null)
             {
                 return null;
@@ -35,7 +35,8 @@ namespace TravelAgencyListImplement.Implements
             List<OrderViewModel> result = new List<OrderViewModel>();
             foreach (var order in source.Orders)
             {
-                if (order.DateCreate.Equals(model.DateCreate) || (order.DateCreate >= model.DateFrom && order.DateCreate <= model.DateTo))
+                if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) ||
+                (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date))
                 {
                     result.Add(CreateModel(order));
                 }
