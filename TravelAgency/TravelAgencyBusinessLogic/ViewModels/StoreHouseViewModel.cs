@@ -6,7 +6,7 @@ namespace TravelAgencyBusinessLogic.ViewModels
 {
     public class StoreHouseViewModel
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         [DisplayName("Название склада")]
         public string StoreHouseName { get; set; }
