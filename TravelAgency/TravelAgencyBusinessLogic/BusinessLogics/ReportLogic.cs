@@ -13,6 +13,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
     {
         private readonly ITravelStorage _travelStorage;
         private readonly IOrderStorage _orderStorage;
+
         public ReportLogic(ITravelStorage travelStorage, IOrderStorage orderStorage)
         {
             _travelStorage = travelStorage;

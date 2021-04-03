@@ -1,7 +1,7 @@
 ﻿
 namespace TravelAgencyView
 {
-    partial class FormClientOrders
+    partial class FormReportOrders
     {
         /// <summary>
         /// Required designer variable.

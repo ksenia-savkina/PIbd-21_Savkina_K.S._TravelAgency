@@ -32,7 +32,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 {
                     docBody.AppendChild(CreateParagraph(new WordParagraph
                     {
-                        Texts = new List<(string, WordTextProperties)> { (travel.TravelName + ": ", new WordTextProperties { Bold = true, Size = "24", }), 
+                        Texts = new List<(string, WordTextProperties)> { (travel.TravelName + ": ", new WordTextProperties { Bold = true, Size = "24", }),
                             (travel.Price.ToString(), new WordTextProperties { Bold = false, Size = "24", }) },
                         TextProperties = new WordTextProperties
                         {

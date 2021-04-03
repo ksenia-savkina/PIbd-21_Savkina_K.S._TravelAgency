@@ -142,7 +142,7 @@ namespace TravelAgencyView
 
         private void списокЗаказовToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormClientOrders>();
+            var form = Container.Resolve<FormReportOrders>();
             form.ShowDialog();
         }
 
