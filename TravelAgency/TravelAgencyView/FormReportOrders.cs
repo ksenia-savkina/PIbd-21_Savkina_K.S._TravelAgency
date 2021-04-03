@@ -7,14 +7,14 @@ using Unity;
 
 namespace TravelAgencyView
 {
-    public partial class FormClientOrders : Form
+    public partial class FormReportOrders : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
         private readonly ReportLogic logic;
 
-        public FormClientOrders(ReportLogic logic)
+        public FormReportOrders(ReportLogic logic)
         {
             InitializeComponent();
             this.logic = logic;

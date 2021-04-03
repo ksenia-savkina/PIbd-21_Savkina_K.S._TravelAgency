@@ -1,5 +1,4 @@
 ﻿using System;
-using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
@@ -13,6 +12,6 @@ namespace TravelAgencyBusinessLogic.ViewModels
 
         public decimal Sum { get; set; }
 
-        public String Status { get; set; }
+        public string Status { get; set; }
     }
 }

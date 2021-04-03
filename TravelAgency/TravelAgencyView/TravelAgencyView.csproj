@@ -208,11 +208,11 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="FormClientOrders.cs">
+    <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FormClientOrders.Designer.cs">
-      <DependentUpon>FormClientOrders.cs</DependentUpon>
+    <Compile Include="FormReportOrders.Designer.cs">
+      <DependentUpon>FormReportOrders.cs</DependentUpon>
     </Compile>
     <Compile Include="FormComponent.cs">
       <SubType>Form</SubType>
