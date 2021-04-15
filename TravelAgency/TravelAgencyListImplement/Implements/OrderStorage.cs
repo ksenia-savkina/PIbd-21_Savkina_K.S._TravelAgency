@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using TravelAgencyBusinessLogic.BindingModels;
+using TravelAgencyBusinessLogic.Enums;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
 using TravelAgencyListImplement.Models;
@@ -37,7 +38,8 @@ namespace TravelAgencyListImplement.Implements
             {
                 if ((!model.DateFrom.HasValue && !model.DateTo.HasValue && order.DateCreate.Date == model.DateCreate.Date) || 
                     (model.DateFrom.HasValue && model.DateTo.HasValue && order.DateCreate.Date >= model.DateFrom.Value.Date && order.DateCreate.Date <= model.DateTo.Value.Date)
-                    || (model.ClientId.HasValue && order.ClientId == model.ClientId))
+                    || (model.ClientId.HasValue && order.ClientId == model.ClientId) || (model.FreeOrders.HasValue && model.FreeOrders.Value && order.Status == OrderStatus.Принят)
+                    || (model.ImplementerId.HasValue && order.ImplementerId == model.ImplementerId && order.Status == OrderStatus.Выполняется))
                 {
                     result.Add(CreateModel(order));
                 }
@@ -112,7 +114,8 @@ namespace TravelAgencyListImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
-            order.ClientId = (int)model.ClientId;
+            order.ClientId = model.ClientId.Value;
+            order.ImplementerId = model.ImplementerId;
             return order;
         }
 
@@ -120,6 +123,7 @@ namespace TravelAgencyListImplement.Implements
         {
             string travelName = null;
             string clientFIO = null;
+            string implementerFIO = null;
             foreach (var travel in source.Travels)
             {
                 if (travel.Id == order.TravelId)
@@ -134,6 +138,13 @@ namespace TravelAgencyListImplement.Implements
                     clientFIO = client.ClientFIO;
                 }
             }
+            foreach (var implementer in source.Implementers)
+            {
+                if (implementer.Id == order.ImplementerId)
+                {
+                    implementerFIO = implementer.ImplementerFIO;
+                }
+            }
             return new OrderViewModel
             {
                 Id = order.Id,
@@ -145,7 +156,9 @@ namespace TravelAgencyListImplement.Implements
                 DateCreate = order.DateCreate,
                 DateImplement = order.DateImplement,
                 ClientId = order.ClientId,
-                ClientFIO = clientFIO
+                ClientFIO = clientFIO,
+                ImplementerId = order.ImplementerId,
+                ImplementerFIO = order.ImplementerId.HasValue ? implementerFIO : string.Empty
             };
         }
     }
