@@ -92,14 +92,14 @@ namespace TravelAgencyView
             this.reportViewer.Size = new System.Drawing.Size(879, 408);
             this.reportViewer.TabIndex = 2;
             // 
-            // FormClientOrders
+            // FormReportOrders
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(881, 450);
             this.Controls.Add(this.reportViewer);
             this.Controls.Add(this.panel1);
-            this.Name = "FormClientOrders";
+            this.Name = "FormReportOrders";
             this.Text = "Заказы клиентов";
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
