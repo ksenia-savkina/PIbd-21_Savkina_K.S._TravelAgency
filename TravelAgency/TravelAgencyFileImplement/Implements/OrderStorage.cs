@@ -87,7 +87,7 @@ namespace TravelAgencyFileImplement.Implements
             order.Status = model.Status;
             order.DateCreate = model.DateCreate;
             order.DateImplement = model.DateImplement;
-            order.ClientId = (int)model.ClientId;
+            order.ClientId = model.ClientId.Value;
             return order;
         }
 
