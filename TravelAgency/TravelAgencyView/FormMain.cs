@@ -58,8 +58,6 @@ namespace TravelAgencyView
             form.ShowDialog();
         }
 
-
-
         private void buttonCreateOrder_Click(object sender, EventArgs e)
         {
             var form = Container.Resolve<FormCreateOrder>();
