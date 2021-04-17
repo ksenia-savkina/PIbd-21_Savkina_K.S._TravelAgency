@@ -21,5 +21,9 @@ namespace TravelAgencyDatabaseImplement
         public virtual DbSet<TravelComponent> TravelComponents { set; get; }
 
         public virtual DbSet<Order> Orders { set; get; }
+
+        public virtual DbSet<StoreHouse> StoreHouses { set; get; }
+
+        public virtual DbSet<StoreHouseComponent> StoreHouseComponents { set; get; }
     }
 }

@@ -39,7 +39,7 @@
 			// buttonRef
 			// 
 			this.buttonRef.Location = new System.Drawing.Point(482, 152);
-			this.buttonRef.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonRef.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonRef.Name = "buttonRef";
 			this.buttonRef.Size = new System.Drawing.Size(105, 35);
 			this.buttonRef.TabIndex = 9;
@@ -50,7 +50,7 @@
 			// buttonDel
 			// 
 			this.buttonDel.Location = new System.Drawing.Point(482, 113);
-			this.buttonDel.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonDel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonDel.Name = "buttonDel";
 			this.buttonDel.Size = new System.Drawing.Size(105, 35);
 			this.buttonDel.TabIndex = 8;
@@ -61,7 +61,7 @@
 			// buttonUpd
 			// 
 			this.buttonUpd.Location = new System.Drawing.Point(482, 74);
-			this.buttonUpd.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonUpd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonUpd.Name = "buttonUpd";
 			this.buttonUpd.Size = new System.Drawing.Size(105, 35);
 			this.buttonUpd.TabIndex = 7;
@@ -72,7 +72,7 @@
 			// buttonAdd
 			// 
 			this.buttonAdd.Location = new System.Drawing.Point(482, 34);
-			this.buttonAdd.Margin = new System.Windows.Forms.Padding(2);
+			this.buttonAdd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.buttonAdd.Name = "buttonAdd";
 			this.buttonAdd.Size = new System.Drawing.Size(105, 35);
 			this.buttonAdd.TabIndex = 6;
@@ -82,10 +82,10 @@
 			// 
 			// dataGridView
 			// 
+			this.dataGridView.AllowUserToAddRows = false;
 			this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-			this.dataGridView.Cursor = System.Windows.Forms.Cursors.Default;
 			this.dataGridView.Location = new System.Drawing.Point(0, 2);
-			this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
+			this.dataGridView.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
 			this.dataGridView.Name = "dataGridView";
 			this.dataGridView.ReadOnly = true;
 			this.dataGridView.RowHeadersVisible = false;
