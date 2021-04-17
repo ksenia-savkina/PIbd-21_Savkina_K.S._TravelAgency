@@ -38,7 +38,6 @@ namespace TravelAgencyView
                     dataGridView.Columns[0].Visible = false;
                     dataGridView.Columns[1].Visible = false;
                     dataGridView.Columns[2].Visible = false;
-                    dataGridView.Columns[2].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
                 }
             }
             catch (Exception ex)

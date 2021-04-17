@@ -113,20 +113,5 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 ClientId = order.ClientId
             });
         }
-
-        public void Delete(OrderBindingModel order)
-        {
-            _orderStorage.Delete(new OrderBindingModel
-            {
-                Id = order.Id,
-                TravelId = order.TravelId,
-                Count = order.Count,
-                Sum = order.Sum,
-                DateCreate = order.DateCreate,
-                DateImplement = order.DateImplement,
-                Status = OrderStatus.Оплачен,
-                ClientId = order.ClientId
-            });
-        }
     }
 }
