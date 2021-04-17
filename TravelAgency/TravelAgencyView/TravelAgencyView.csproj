@@ -312,12 +312,7 @@
     </Compile>
     <EmbeddedResource Include="ReportOrders.rdlc" />
     <None Include="packages.config" />
-    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ClientViewModel.datasource" />
-    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ComponentViewModel.datasource" />
-    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.OrderViewModel.datasource" />
     <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
-    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ReportTravelComponentViewModel.datasource" />
-    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.TravelViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
