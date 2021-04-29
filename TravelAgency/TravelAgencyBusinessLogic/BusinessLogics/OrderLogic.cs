@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Enums;
+using TravelAgencyBusinessLogic.HelperModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
 
@@ -13,9 +14,12 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
 
         private readonly object locker = new object();
 
-        public OrderLogic(IOrderStorage orderStorage)
+        private readonly IClientStorage _clientStorage;
+
+        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
         {
             _orderStorage = orderStorage;
+            _clientStorage = clientStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -41,6 +45,13 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 DateCreate = DateTime.Now,
                 Status = OrderStatus.Принят,
                 ClientId = model.ClientId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = model.ClientId })?.Email,
+                Subject = $"Новый заказ",
+                Text = $"Заказ от {DateTime.Now} на сумму {model.Sum:N2} принят."
             });
         }
 
@@ -73,6 +84,13 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                     ClientId = order.ClientId,
                     ImplementerId = model.ImplementerId
                 });
+
+                MailLogic.MailSendAsync(new MailSendInfo
+                {
+                    MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                    Subject = $"Заказ №{order.Id}",
+                    Text = $"Заказ №{order.Id} передан в работу."
+                });
             }
         }
 
@@ -99,6 +117,13 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId
             });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} готов."
+            });
         }
 
         public void PayOrder(ChangeStatusBindingModel model)
@@ -123,6 +148,13 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 Status = OrderStatus.Оплачен,
                 ClientId = order.ClientId,
                 ImplementerId = order.ImplementerId
+            });
+
+            MailLogic.MailSendAsync(new MailSendInfo
+            {
+                MailAddress = _clientStorage.GetElement(new ClientBindingModel { Id = order.ClientId })?.Email,
+                Subject = $"Заказ №{order.Id}",
+                Text = $"Заказ №{order.Id} оплачен."
             });
         }
     }
