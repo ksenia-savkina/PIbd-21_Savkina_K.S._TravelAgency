@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using TravelAgencyBusinessLogic.BusinessLogics;
+using TravelAgencyBusinessLogic.HelperModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyDatabaseImplement.Implements;
 
@@ -24,9 +25,18 @@ namespace TravelAgencyRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ITravelStorage, TravelStorage>();
+            services.AddTransient<IMessageInfoStorage, MessageInfoStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<TravelLogic>();
+            services.AddTransient<MailLogic>();
+            MailLogic.MailConfig(new MailConfig
+            {
+                SmtpClientHost = "smtp.gmail.com",
+                SmtpClientPort = 587,
+                MailLogin = "randomnameforlab@gmail.com",
+                MailPassword = "nepassword123",
+            });
             services.AddControllers().AddNewtonsoftJson();
         }
 
