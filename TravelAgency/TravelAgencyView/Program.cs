@@ -35,7 +35,8 @@ namespace TravelAgencyView
             currentContainer.RegisterType<TravelLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ReportLogic>(new HierarchicalLifetimeManager());
             currentContainer.RegisterType<ClientLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<ImplementerLogic>(new HierarchicalLifetimeManager());           
+            currentContainer.RegisterType<ImplementerLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<WorkModeling>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
