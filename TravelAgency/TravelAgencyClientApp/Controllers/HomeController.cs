@@ -127,7 +127,7 @@ namespace TravelAgencyClientApp.Controllers
 
             APIClient.PostRequest("api/main/createorder", new CreateOrderBindingModel
             {
-                ClientId = (int)Program.Client.Id,
+                ClientId = Program.Client.Id,
                 TravelId = travel,
                 Count = count,
                 Sum = sum
