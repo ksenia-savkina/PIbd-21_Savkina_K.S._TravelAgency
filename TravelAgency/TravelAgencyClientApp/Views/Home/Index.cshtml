@@ -1,11 +1,11 @@
 ﻿@using TravelAgencyBusinessLogic.ViewModels
 
-@model List<MessageInfoViewModel>
+@model List<OrderViewModel>
 @{
-    ViewData["Title"] = "Mails";
+    ViewData["Title"] = "Home Page";
 }
 <div class="text-center">
-    <h1 class="display-4">Письма</h1>
+    <h1 class="display-4">Заказы</h1>
 </div>
 <div class="text-center">
     @{
@@ -14,20 +14,29 @@
             <h3 class="display-4">Авторизируйтесь</h3>
             return;
         }
+        <p>
+            <a asp-action="Create">Создать заказ</a>
+        </p>
         <table class="table">
             <thead>
                 <tr>
                     <th>
-                        Отправитель
+                        Номер
                     </th>
                     <th>
-                        Дата письма
+                        Путёвка
                     </th>
                     <th>
-                        Заголовок
+                        Дата создания
                     </th>
                     <th>
-                        Текст
+                        Количество
+                    </th>
+                    <th>
+                        Сумма
+                    </th>
+                    <th>
+                        Статус
                     </th>
                 </tr>
             </thead>
@@ -36,16 +45,22 @@
                 {
                     <tr>
                         <td>
-                            @Html.DisplayFor(modelItem => item.SenderName)
+                            @Html.DisplayFor(modelItem => item.Id)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.DateDelivery)
+                            @Html.DisplayFor(modelItem => item.TravelName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Subject)
+                            @Html.DisplayFor(modelItem => item.DateCreate)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Body)
+                            @Html.DisplayFor(modelItem => item.Count)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Sum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Status)
                         </td>
                     </tr>
                 }

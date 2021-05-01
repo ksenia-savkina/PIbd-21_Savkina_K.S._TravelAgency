@@ -197,7 +197,7 @@ namespace TravelAgencyDatabaseImplement.Migrations
             modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.MessageInfo", b =>
                 {
                     b.HasOne("TravelAgencyDatabaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("MessageInfo")
                         .HasForeignKey("ClientId");
                 });
 

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Interfaces;
@@ -57,7 +56,8 @@ namespace TravelAgencyDatabaseImplement.Implements
                 MessageInfo element = context.MessagesInfo.FirstOrDefault(rec => rec.MessageId == model.MessageId);
                 if (element != null)
                 {
-                    throw new Exception("Уже есть письмо с таким идентификатором");
+                    // throw new Exception("Уже есть письмо с таким идентификатором");
+                    return;
                 }
                 context.MessagesInfo.Add(new MessageInfo
                 {

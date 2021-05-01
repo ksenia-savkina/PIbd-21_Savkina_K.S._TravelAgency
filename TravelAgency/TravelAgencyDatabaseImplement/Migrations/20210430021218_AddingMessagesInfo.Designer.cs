@@ -10,7 +10,7 @@ using TravelAgencyDatabaseImplement;
 namespace TravelAgencyDatabaseImplement.Migrations
 {
     [DbContext(typeof(TravelAgencyDatabase))]
-    [Migration("20210429064616_AddingMessagesInfo")]
+    [Migration("20210430021218_AddingMessagesInfo")]
     partial class AddingMessagesInfo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -199,7 +199,7 @@ namespace TravelAgencyDatabaseImplement.Migrations
             modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.MessageInfo", b =>
                 {
                     b.HasOne("TravelAgencyDatabaseImplement.Models.Client", "Client")
-                        .WithMany()
+                        .WithMany("MessageInfo")
                         .HasForeignKey("ClientId");
                 });
 

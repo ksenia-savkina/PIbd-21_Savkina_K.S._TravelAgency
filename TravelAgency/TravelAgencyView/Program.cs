@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Configuration;
 using System.Threading;
 using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BusinessLogics;
@@ -27,12 +28,14 @@ namespace TravelAgencyView
                 MailLogin = ConfigurationManager.AppSettings["MailLogin"],
                 MailPassword = ConfigurationManager.AppSettings["MailPassword"],
             });
+            var mailLogic = container.Resolve<MailLogic>();
             // создаем таймер
             var timer = new System.Threading.Timer(new TimerCallback(MailCheck), new MailCheckInfo
             {
                 PopHost = ConfigurationManager.AppSettings["PopHost"],
                 PopPort = Convert.ToInt32(ConfigurationManager.AppSettings["PopPort"]),
-                Storage = container.Resolve<IMessageInfoStorage>()
+                Storage = container.Resolve<IMessageInfoStorage>(),
+                ClientStorage = container.Resolve<IClientStorage>()
             }, 0, 100000);
 
             Application.EnableVisualStyles();

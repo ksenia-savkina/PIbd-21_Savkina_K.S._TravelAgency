@@ -16,16 +16,23 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
     public class MailLogic
     {
         private static string smtpClientHost;
+
         private static int smtpClientPort;
+
         private static string mailLogin;
+
         private static string mailPassword;
+
         private readonly IMessageInfoStorage _messageInfoStorage;
+
         private readonly IClientStorage _clientStorage;
+
         public MailLogic(IMessageInfoStorage messageInfoStorage, IClientStorage clientStorage)
         {
             _messageInfoStorage = messageInfoStorage;
             _clientStorage = clientStorage;
         }
+
         public List<MessageInfoViewModel> Read(MessageInfoBindingModel model)
         {
             if (model == null)
@@ -34,12 +41,14 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             }
             return _messageInfoStorage.GetFilteredList(model);
         }
+
         public void CreateOrder(MessageInfoBindingModel model)
         {
             var client = _clientStorage.GetElement(new ClientBindingModel { Email = model.FromMailAddress });
             model.ClientId = client?.Id;
             _messageInfoStorage.Insert(model);
         }
+
         public static void MailConfig(MailConfig config)
         {
             smtpClientHost = config.SmtpClientHost;
@@ -47,6 +56,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             mailLogin = config.MailLogin;
             mailPassword = config.MailPassword;
         }
+
         public static async void MailSendAsync(MailSendInfo info)
         {
             if (string.IsNullOrEmpty(smtpClientHost) || smtpClientPort == 0)
@@ -86,6 +96,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 }
             }
         }
+
         public static async void MailCheck(MailCheckInfo info)
         {
             if (string.IsNullOrEmpty(info.PopHost) || info.PopPort == 0)
@@ -119,7 +130,8 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                                     MessageId = message.MessageId,
                                     FromMailAddress = mail.Address,
                                     Subject = message.Subject,
-                                    Body = message.TextBody
+                                    Body = message.TextBody,
+                                    ClientId = info.ClientStorage.GetElement(new ClientBindingModel { Email = mail.Address })?.Id
                                 });
                             }
                         }

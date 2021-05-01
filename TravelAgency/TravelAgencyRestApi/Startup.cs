@@ -34,8 +34,8 @@ namespace TravelAgencyRestApi
             {
                 SmtpClientHost = "smtp.gmail.com",
                 SmtpClientPort = 587,
-                MailLogin = "randomnameforlab@gmail.com",
-                MailPassword = "nepassword123",
+                MailLogin = "labwork15kafis@gmail.com",
+                MailPassword = "passlab15"
             });
             services.AddControllers().AddNewtonsoftJson();
         }

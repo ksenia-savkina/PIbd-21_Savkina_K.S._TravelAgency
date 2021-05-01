@@ -1,4 +1,6 @@
-﻿namespace TravelAgencyBusinessLogic.HelperModels
+﻿using TravelAgencyBusinessLogic.Interfaces;
+
+namespace TravelAgencyBusinessLogic.HelperModels
 {
     public class MailCheckInfo
     {
@@ -6,6 +8,8 @@
 
         public int PopPort { get; set; }
 
-        public IMessageInfoLogic Logic { get; set; }
+        public IMessageInfoStorage Storage { get; set; }
+
+        public IClientStorage ClientStorage { get; set; }
     }
 }
