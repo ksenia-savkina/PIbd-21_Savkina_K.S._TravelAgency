@@ -17,6 +17,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
         private readonly OrderLogic _orderLogic;
 
         private readonly Random rnd;
+
         public WorkModeling(IImplementerStorage implementerStorage, IOrderStorage orderStorage, OrderLogic orderLogic)
         {
             this._implementerStorage = implementerStorage;
