@@ -91,7 +91,7 @@
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(1078, 508);
+            this.dataGridView.Size = new System.Drawing.Size(1078, 515);
             this.dataGridView.TabIndex = 8;
             // 
             // menuStrip
@@ -104,7 +104,7 @@
             this.menuStrip.Location = new System.Drawing.Point(0, 0);
             this.menuStrip.Name = "menuStrip";
             this.menuStrip.Padding = new System.Windows.Forms.Padding(5, 2, 0, 2);
-            this.menuStrip.Size = new System.Drawing.Size(1309, 28);
+            this.menuStrip.Size = new System.Drawing.Size(1312, 28);
             this.menuStrip.TabIndex = 7;
             this.menuStrip.Text = "menuStrip";
             // 
@@ -189,7 +189,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1309, 554);
+            this.ClientSize = new System.Drawing.Size(1312, 553);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonPayOrder);
             this.Controls.Add(this.buttonCreateOrder);
