@@ -150,6 +150,54 @@ namespace TravelAgencyDatabaseImplement.Migrations
                     b.ToTable("Orders");
                 });
 
+            modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.StoreHouse", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("DateCreate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("ResponsiblePersonFullName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("StoreHouseName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("StoreHouses");
+                });
+
+            modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.StoreHouseComponent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<int>("ComponentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("int");
+
+                    b.Property<int>("StoreHouseId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ComponentId");
+
+                    b.HasIndex("StoreHouseId");
+
+                    b.ToTable("StoreHouseComponents");
+                });
+
             modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.Travel", b =>
                 {
                     b.Property<int>("Id")
@@ -216,6 +264,21 @@ namespace TravelAgencyDatabaseImplement.Migrations
                     b.HasOne("TravelAgencyDatabaseImplement.Models.Travel", "Travel")
                         .WithMany("Order")
                         .HasForeignKey("TravelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("TravelAgencyDatabaseImplement.Models.StoreHouseComponent", b =>
+                {
+                    b.HasOne("TravelAgencyDatabaseImplement.Models.Component", "Component")
+                        .WithMany("StoreHouseComponents")
+                        .HasForeignKey("ComponentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgencyDatabaseImplement.Models.StoreHouse", "StoreHouse")
+                        .WithMany("StoreHouseComponents")
+                        .HasForeignKey("StoreHouseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

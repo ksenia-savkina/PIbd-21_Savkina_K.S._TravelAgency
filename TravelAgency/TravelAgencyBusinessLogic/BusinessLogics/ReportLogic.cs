@@ -13,11 +13,13 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
     {
         private readonly ITravelStorage _travelStorage;
         private readonly IOrderStorage _orderStorage;
+        private readonly IStoreHouseStorage _storeHouseStorage;
 
-        public ReportLogic(ITravelStorage travelStorage, IOrderStorage orderStorage)
+        public ReportLogic(ITravelStorage travelStorage, IOrderStorage orderStorage, IStoreHouseStorage storeHouseStorage)
         {
             _travelStorage = travelStorage;
             _orderStorage = orderStorage;
+            _storeHouseStorage = storeHouseStorage;
         }
         /// <summary>
         /// Получение списка путёвок с указанием, какие компоненты в них используются
@@ -102,6 +104,71 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 DateFrom = model.DateFrom.Value,
                 DateTo = model.DateTo.Value,
                 Orders = GetOrders(model)
+            });
+        }
+
+        public void SaveStoreHousesToWordFile(ReportBindingModel model)
+        {
+            SaveToWord.CreateDocStoreHouse(new WordInfoStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouses = _storeHouseStorage.GetFullList()
+            });
+        }
+
+        public List<ReportStoreHouseComponentViewModel> GetComponentStoreHouse()
+        {
+            var storeHouses = _storeHouseStorage.GetFullList();
+            var list = new List<ReportStoreHouseComponentViewModel>();
+            foreach (var storeHouse in storeHouses)
+            {
+                var record = new ReportStoreHouseComponentViewModel
+                {
+                    StoreHouseName = storeHouse.StoreHouseName,
+                    Components = new List<Tuple<string, int>>(),
+                    TotalCount = 0
+                };
+                foreach (var component in storeHouse.StoreHouseComponents)
+                {
+                    record.Components.Add(new Tuple<string, int>(component.Value.Item1, component.Value.Item2));
+                    record.TotalCount += component.Value.Item2;
+                }
+                list.Add(record);
+            }
+            return list;
+        }
+
+        public void SaveComponentStoreHouseToExcelFile(ReportBindingModel model)
+        {
+            SaveToExcel.CreateDocStoreHouse(new ExcelInfoStoreHouse
+            {
+                FileName = model.FileName,
+                Title = "Список складов",
+                StoreHouseComponents = GetComponentStoreHouse()
+            });
+        }
+
+        public List<ReportOrdersAllPeriodViewModel> GetOrdersAllPeriod()
+        {
+            return _orderStorage.GetFullList()
+            .GroupBy(order => order.DateCreate.ToShortDateString())
+            .Select(x => new ReportOrdersAllPeriodViewModel
+            {
+                DateCreate = Convert.ToDateTime(x.Key),
+                Count = x.Count(),
+                Sum = x.Sum(order => order.Sum)
+            })
+            .ToList();
+        }
+
+        public void SaveOrdersAllPeriodToPdfFile(ReportBindingModel model)
+        {
+            SaveToPdf.CreateDocOrdersAllPeriod(new PdfInfoOrdersAllPeriod
+            {
+                FileName = model.FileName,
+                Title = "Список заказов",
+                Orders = GetOrdersAllPeriod()
             });
         }
     }

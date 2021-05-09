@@ -162,7 +162,7 @@
             // списокПутёвокToolStripMenuItem
             // 
             this.списокПутёвокToolStripMenuItem.Name = "списокПутёвокToolStripMenuItem";
-            this.списокПутёвокToolStripMenuItem.Size = new System.Drawing.Size(270, 26);
+            this.списокПутёвокToolStripMenuItem.Size = new System.Drawing.Size(310, 26);
             this.списокПутёвокToolStripMenuItem.Text = "Список путёвок";
             this.списокПутёвокToolStripMenuItem.Click += new System.EventHandler(this.списокПутёвокToolStripMenuItem_Click);
             // 

@@ -9,7 +9,7 @@ namespace TravelAgencyDatabaseImplement
         {
             if (optionsBuilder.IsConfigured == false)
             {
-                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-7MR3DNA6\SQLEXPRESS;Initial Catalog=TravelAgencyNewDatabase;Integrated Security=True;MultipleActiveResultSets=True;");
+                optionsBuilder.UseSqlServer(@"Data Source=LAPTOP-7MR3DNA6\SQLEXPRESS;Initial Catalog=TravelAgencyDatabaseSH;Integrated Security=True;MultipleActiveResultSets=True;");
             }
             base.OnConfiguring(optionsBuilder);
         }
@@ -27,5 +27,9 @@ namespace TravelAgencyDatabaseImplement
         public virtual DbSet<Implementer> Implementers { set; get; }
 
         public virtual DbSet<MessageInfo> MessagesInfo { set; get; }
+
+        public virtual DbSet<StoreHouse> StoreHouses { set; get; }
+
+        public virtual DbSet<StoreHouseComponent> StoreHouseComponents { set; get; }
     }
 }

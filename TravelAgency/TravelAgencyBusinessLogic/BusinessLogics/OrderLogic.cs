@@ -11,15 +11,20 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+        private readonly IStoreHouseStorage _storeHouseStorage;
+        private readonly ITravelStorage _travelStorage;
 
         private readonly object locker = new object();
 
         private readonly IClientStorage _clientStorage;
 
         public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
+        public OrderLogic(IOrderStorage orderStorage, IStoreHouseStorage storeHouseStorage, ITravelStorage travelStorage)
         {
             _orderStorage = orderStorage;
             _clientStorage = clientStorage;
+            _storeHouseStorage = storeHouseStorage;
+            _travelStorage = travelStorage;
         }
 
         public List<OrderViewModel> Read(OrderBindingModel model)
@@ -60,6 +65,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             lock (locker)
             {
                 var order = _orderStorage.GetElement(new OrderBindingModel { Id = model.OrderId });
+                var status = OrderStatus.Выполняется;
                 if (order == null)
                 {
                     throw new Exception("Не найден заказ");
@@ -72,6 +78,10 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 {
                     throw new Exception("У заказа уже есть исполнитель");
                 }
+                if (!_storeHouseStorage.WriteOff(order.Count, _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId }).TravelComponents))
+                {
+                    status = OrderStatus.ТребуютсяМатериалы;
+                }
                 _orderStorage.Update(new OrderBindingModel
                 {
                     Id = order.Id,
@@ -80,7 +90,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                     Sum = order.Sum,
                     DateCreate = order.DateCreate,
                     DateImplement = DateTime.Now,
-                    Status = OrderStatus.Выполняется,
+                    Status = status,
                     ClientId = order.ClientId,
                     ImplementerId = model.ImplementerId
                 });
@@ -100,6 +110,14 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
             if (order == null)
             {
                 throw new Exception("Не найден заказ");
+            }
+            if (order.Status == OrderStatus.ТребуютсяМатериалы)
+            {
+                if (!_storeHouseStorage.WriteOff(order.Count, _travelStorage.GetElement(new TravelBindingModel { Id = order.TravelId }).TravelComponents))
+                {
+                    return;
+                }
+                order.Status = OrderStatus.Выполняется;
             }
             if (order.Status != OrderStatus.Выполняется)
             {

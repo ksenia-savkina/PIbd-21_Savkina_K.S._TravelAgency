@@ -54,6 +54,16 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                 // отдыхаем
                 Thread.Sleep(implementer.PauseTime);
             }
+            var needMaterialsOrders = await Task.Run(() => _orderStorage.GetFilteredList(new OrderBindingModel 
+            { ImplementerId = implementer.Id, Status = Enums.OrderStatus.ТребуютсяМатериалы }));
+            foreach (var order in needMaterialsOrders)
+            {
+                // делаем работу заново
+                Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
+                _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
+                // отдыхаем
+                Thread.Sleep(implementer.PauseTime);
+            }
             await Task.Run(() =>
             {
                 foreach (var order in orders)
@@ -68,10 +78,7 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
                         });
                         // делаем работу
                         Thread.Sleep(implementer.WorkingTime * rnd.Next(1, 5) * order.Count);
-                        _orderLogic.FinishOrder(new ChangeStatusBindingModel
-                        {
-                            OrderId = order.Id
-                        });
+                        _orderLogic.FinishOrder(new ChangeStatusBindingModel { OrderId = order.Id });
                         // отдыхаем
                         Thread.Sleep(implementer.PauseTime);
                     }
