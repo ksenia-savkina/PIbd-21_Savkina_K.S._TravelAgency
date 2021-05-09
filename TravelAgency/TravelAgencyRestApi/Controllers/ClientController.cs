@@ -54,7 +54,7 @@ namespace TravelAgencyRestApi.Controllers
             }
             if (model.Password.Length > _passwordMaxLength || model.Password.Length < _passwordMinLength || !Regex.IsMatch(model.Password, @"^((\w+\d+\W+)|(\w+\W+\d+)|(\d+\w+\W+)|(\d+\W+\w+)|(\W+\w+\d+)|(\W+\d+\w+))[\w\d\W]*$"))
             {
-                throw new Exception($"Пароль длиной от {_passwordMinLength} до {_passwordMaxLength} должен состоять из цифр, букв и небуквенных символов");
+                throw new Exception($"Пароль должен иметь длину от {_passwordMinLength} до {_passwordMaxLength}, состоять из цифр, букв и небуквенных символов");
             }
         }
     }
