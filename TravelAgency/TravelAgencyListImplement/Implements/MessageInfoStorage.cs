@@ -46,13 +46,18 @@ namespace TravelAgencyListImplement.Implements
 
         public void Insert(MessageInfoBindingModel model)
         {
-            MessageInfo tempMessageInfo = new MessageInfo { MessageId = "1" };
+            MessageInfo tempMessageInfo = null;
             foreach (var messageInfo in source.MessagesInfo)
             {
-                if (Convert.ToInt32(messageInfo.MessageId) >= Convert.ToInt32(tempMessageInfo.MessageId))
+                if (messageInfo.MessageId == model.MessageId)
                 {
-                    tempMessageInfo.MessageId = messageInfo.MessageId + 1;
+                    tempMessageInfo = messageInfo;
+                    break;
                 }
+            }
+            if (tempMessageInfo != null)
+            {
+                return;
             }
             source.MessagesInfo.Add(CreateModel(model, tempMessageInfo));
         }

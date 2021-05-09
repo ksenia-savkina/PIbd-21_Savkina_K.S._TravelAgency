@@ -1,10 +1,10 @@
-﻿using TravelAgencyBusinessLogic.BindingModels;
-using TravelAgencyBusinessLogic.ViewModels;
-using TravelAgencyClientApp.Models;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using TravelAgencyBusinessLogic.BindingModels;
+using TravelAgencyBusinessLogic.ViewModels;
+using TravelAgencyClientApp.Models;
 
 namespace TravelAgencyClientApp.Controllers
 {

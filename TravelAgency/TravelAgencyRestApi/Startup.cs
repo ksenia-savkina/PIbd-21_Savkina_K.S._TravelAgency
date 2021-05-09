@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Threading;
 using TravelAgencyBusinessLogic.BusinessLogics;
 using TravelAgencyBusinessLogic.HelperModels;
 using TravelAgencyBusinessLogic.Interfaces;
@@ -32,11 +34,20 @@ namespace TravelAgencyRestApi
             services.AddTransient<MailLogic>();
             MailLogic.MailConfig(new MailConfig
             {
-                SmtpClientHost = "smtp.gmail.com",
-                SmtpClientPort = 587,
-                MailLogin = "labwork15kafis@gmail.com",
-                MailPassword = "passlab15"
+                SmtpClientHost = Configuration["SmtpClientHost"],
+                SmtpClientPort = Convert.ToInt32(Configuration["SmtpClientPort"]),
+                MailLogin = Configuration["MailLogin"],
+                MailPassword = Configuration["MailPassword"],
             });
+
+            var timer = new Timer(new TimerCallback(MailCheck), new MailCheckInfo
+            {
+                PopHost = Configuration["PopHost"],
+                PopPort = Convert.ToInt32(Configuration["PopPort"]),
+                Storage = new MessageInfoStorage(),
+                ClientStorage = new ClientStorage()
+            }, 0, 100000);
+
             services.AddControllers().AddNewtonsoftJson();
         }
 
@@ -52,6 +63,11 @@ namespace TravelAgencyRestApi
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
+        }
+
+        private static void MailCheck(object obj)
+        {
+            MailLogic.MailCheck((MailCheckInfo)obj);
         }
     }
 }
