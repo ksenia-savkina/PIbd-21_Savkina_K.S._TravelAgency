@@ -13,6 +13,8 @@ namespace TravelAgencyListImplement
 
         public List<Travel> Travels { get; set; }
 
+        public List<StoreHouse> StoreHouses { get; set; }
+
         public List<Client> Clients { get; set; }
 
         public List<Implementer> Implementers { get; set; }
@@ -24,6 +26,7 @@ namespace TravelAgencyListImplement
             Travels = new List<Travel>();
             Clients = new List<Client>();
             Implementers = new List<Implementer>();
+            StoreHouses = new List<StoreHouse>();
         }
 
         public static DataListSingleton GetInstance()

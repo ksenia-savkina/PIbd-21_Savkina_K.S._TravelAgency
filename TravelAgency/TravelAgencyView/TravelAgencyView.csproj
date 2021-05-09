@@ -220,6 +220,12 @@
     <Compile Include="FormImplementers.Designer.cs">
       <DependentUpon>FormImplementers.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormReportComponentStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportComponentStoreHouse.Designer.cs">
+      <DependentUpon>FormReportComponentStoreHouse.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportOrders.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +262,30 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormRefillStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormRefillStoreHouse.Designer.cs">
+      <DependentUpon>FormRefillStoreHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormReportOrdersAllPeriod.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormReportOrdersAllPeriod.Designer.cs">
+      <DependentUpon>FormReportOrdersAllPeriod.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStoreHouse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStoreHouse.Designer.cs">
+      <DependentUpon>FormStoreHouse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormStoreHouses.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStoreHouses.Designer.cs">
+      <DependentUpon>FormStoreHouses.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormReportComponentTravels.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -286,6 +316,12 @@
     <EmbeddedResource Include="FormClients.resx">
       <DependentUpon>FormClients.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormComponent.resx">
+      <DependentUpon>FormComponent.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormComponents.resx">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -298,9 +334,31 @@
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormRefillStoreHouse.resx">
+      <DependentUpon>FormRefillStoreHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportComponentStoreHouse.resx">
+      <DependentUpon>FormReportComponentStoreHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportOrdersAllPeriod.resx">
+      <DependentUpon>FormReportOrdersAllPeriod.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStoreHouse.resx">
+      <DependentUpon>FormStoreHouse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStoreHouses.resx">
+      <DependentUpon>FormStoreHouses.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTravel.resx">
+      <DependentUpon>FormTravel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTravelComponent.resx">
+      <DependentUpon>FormTravelComponent.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormTravels.resx">
       <DependentUpon>FormTravels.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -311,7 +369,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
     <EmbeddedResource Include="ReportOrders.rdlc" />
+    <EmbeddedResource Include="ReportOrdersAllPeriod.rdlc" />
     <None Include="packages.config" />
+    <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ReportOrdersAllPeriodViewModel.datasource" />
     <None Include="Properties\DataSources\TravelAgencyBusinessLogic.ViewModels.ReportOrdersViewModel.datasource" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

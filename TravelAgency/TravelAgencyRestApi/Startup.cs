@@ -24,9 +24,13 @@ namespace TravelAgencyRestApi
             services.AddTransient<IClientStorage, ClientStorage>();
             services.AddTransient<IOrderStorage, OrderStorage>();
             services.AddTransient<ITravelStorage, TravelStorage>();
+            services.AddTransient<IStoreHouseStorage, StoreHouseStorage>();
+            services.AddTransient<IComponentStorage, ComponentStorage>();
             services.AddTransient<OrderLogic>();
             services.AddTransient<ClientLogic>();
             services.AddTransient<TravelLogic>();
+            services.AddTransient<StoreHouseLogic>();
+            services.AddTransient<ComponentLogic>();
             services.AddControllers().AddNewtonsoftJson();
         }
 

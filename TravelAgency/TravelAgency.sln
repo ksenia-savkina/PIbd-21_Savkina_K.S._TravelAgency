@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyBusinessLogic",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyClientApp", "TravelAgencyClientApp\TravelAgencyClientApp.csproj", "{B0AEF244-47E7-4FFF-8CFA-75BFEE635265}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelAgencyRestApi", "TravelAgencyRestApi\TravelAgencyRestApi.csproj", "{20C55386-B58D-4092-85AE-57EE9616BD16}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TravelAgencyRestApi", "TravelAgencyRestApi\TravelAgencyRestApi.csproj", "{20C55386-B58D-4092-85AE-57EE9616BD16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TravelAgencyStoreHouseApp", "TravelAgencyStoreHouseApp\TravelAgencyStoreHouseApp.csproj", "{EF547268-5F93-4FCD-AD46-BE6A22991677}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,10 @@ Global
 		{20C55386-B58D-4092-85AE-57EE9616BD16}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20C55386-B58D-4092-85AE-57EE9616BD16}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20C55386-B58D-4092-85AE-57EE9616BD16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF547268-5F93-4FCD-AD46-BE6A22991677}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF547268-5F93-4FCD-AD46-BE6A22991677}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF547268-5F93-4FCD-AD46-BE6A22991677}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF547268-5F93-4FCD-AD46-BE6A22991677}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
