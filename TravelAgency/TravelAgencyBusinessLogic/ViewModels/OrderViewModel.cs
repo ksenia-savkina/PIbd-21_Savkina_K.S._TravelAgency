@@ -14,7 +14,7 @@ namespace TravelAgencyBusinessLogic.ViewModels
         [DataMember]
         public int Id { get; set; }
 
-        [DataMember] 
+        [DataMember]
         public int ClientId { get; set; }
 
         [DataMember]
@@ -24,7 +24,7 @@ namespace TravelAgencyBusinessLogic.ViewModels
         public int? ImplementerId { get; set; }
 
         [DataMember]
-        [DisplayName("Клиент")] 
+        [DisplayName("Клиент")]
         public string ClientFIO { get; set; }
 
         [DataMember]
@@ -46,7 +46,7 @@ namespace TravelAgencyBusinessLogic.ViewModels
         [DataMember]
         [DisplayName("Статус")]
         public OrderStatus Status { get; set; }
-        
+
         [DataMember]
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
