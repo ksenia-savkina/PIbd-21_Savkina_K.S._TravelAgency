@@ -11,15 +11,16 @@ namespace TravelAgencyBusinessLogic.BusinessLogics
     public class OrderLogic
     {
         private readonly IOrderStorage _orderStorage;
+
         private readonly IStoreHouseStorage _storeHouseStorage;
+
         private readonly ITravelStorage _travelStorage;
 
         private readonly object locker = new object();
 
         private readonly IClientStorage _clientStorage;
 
-        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage)
-        public OrderLogic(IOrderStorage orderStorage, IStoreHouseStorage storeHouseStorage, ITravelStorage travelStorage)
+        public OrderLogic(IOrderStorage orderStorage, IClientStorage clientStorage, IStoreHouseStorage storeHouseStorage, ITravelStorage travelStorage)
         {
             _orderStorage = orderStorage;
             _clientStorage = clientStorage;
