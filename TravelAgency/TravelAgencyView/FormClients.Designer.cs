@@ -37,24 +37,25 @@ namespace TravelAgencyView
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Location = new System.Drawing.Point(1, 0);
-            this.dataGridView.Margin = new System.Windows.Forms.Padding(2);
+            this.dataGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dataGridView.Name = "dataGridView";
             this.dataGridView.ReadOnly = true;
             this.dataGridView.RowHeadersVisible = false;
             this.dataGridView.RowHeadersWidth = 51;
             this.dataGridView.RowTemplate.Height = 24;
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView.Size = new System.Drawing.Size(309, 268);
+            this.dataGridView.Size = new System.Drawing.Size(412, 330);
             this.dataGridView.TabIndex = 9;
             // 
             // buttonDel
             // 
-            this.buttonDel.Location = new System.Drawing.Point(335, 93);
-            this.buttonDel.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonDel.Location = new System.Drawing.Point(447, 114);
+            this.buttonDel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonDel.Name = "buttonDel";
-            this.buttonDel.Size = new System.Drawing.Size(93, 24);
+            this.buttonDel.Size = new System.Drawing.Size(124, 30);
             this.buttonDel.TabIndex = 13;
             this.buttonDel.Text = "Удалить";
             this.buttonDel.UseVisualStyleBackColor = true;
@@ -62,10 +63,10 @@ namespace TravelAgencyView
             // 
             // buttonRef
             // 
-            this.buttonRef.Location = new System.Drawing.Point(335, 135);
-            this.buttonRef.Margin = new System.Windows.Forms.Padding(2);
+            this.buttonRef.Location = new System.Drawing.Point(447, 166);
+            this.buttonRef.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.buttonRef.Name = "buttonRef";
-            this.buttonRef.Size = new System.Drawing.Size(93, 24);
+            this.buttonRef.Size = new System.Drawing.Size(124, 30);
             this.buttonRef.TabIndex = 14;
             this.buttonRef.Text = "Обновить";
             this.buttonRef.UseVisualStyleBackColor = true;
@@ -73,12 +74,13 @@ namespace TravelAgencyView
             // 
             // FormClients
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(439, 269);
+            this.ClientSize = new System.Drawing.Size(585, 331);
             this.Controls.Add(this.buttonRef);
             this.Controls.Add(this.buttonDel);
             this.Controls.Add(this.dataGridView);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "FormClients";
             this.Text = "Клиенты";
             this.Load += new System.EventHandler(this.FormClients_Load);

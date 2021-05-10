@@ -303,6 +303,9 @@
     <EmbeddedResource Include="FormClients.resx">
       <DependentUpon>FormClients.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormComponents.resx">
+      <DependentUpon>FormComponents.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormCreateOrder.resx">
       <DependentUpon>FormCreateOrder.cs</DependentUpon>
     </EmbeddedResource>
@@ -317,6 +320,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormReportComponentTravels.resx">
+      <DependentUpon>FormReportComponentTravels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormTravel.resx">
+      <DependentUpon>FormTravel.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormTravels.resx">
       <DependentUpon>FormTravels.cs</DependentUpon>

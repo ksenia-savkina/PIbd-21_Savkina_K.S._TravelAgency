@@ -30,15 +30,16 @@ namespace TravelAgencyView
         private void InitializeComponent()
         {
             this.dataGridView = new System.Windows.Forms.DataGridView();
-            this.buttonSaveToExcel = new System.Windows.Forms.Button();
             this.ColumnTravel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnComponent = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ColumnCount = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.buttonSaveToExcel = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView
             // 
+            this.dataGridView.AllowUserToAddRows = false;
             this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ColumnTravel,
@@ -54,16 +55,6 @@ namespace TravelAgencyView
             this.dataGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dataGridView.Size = new System.Drawing.Size(668, 384);
             this.dataGridView.TabIndex = 1;
-            // 
-            // buttonSaveToExcel
-            // 
-            this.buttonSaveToExcel.Location = new System.Drawing.Point(13, 13);
-            this.buttonSaveToExcel.Name = "buttonSaveToExcel";
-            this.buttonSaveToExcel.Size = new System.Drawing.Size(244, 29);
-            this.buttonSaveToExcel.TabIndex = 2;
-            this.buttonSaveToExcel.Text = "Сохранить в Excel";
-            this.buttonSaveToExcel.UseVisualStyleBackColor = true;
-            this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
             // ColumnTravel
             // 
@@ -89,6 +80,16 @@ namespace TravelAgencyView
             this.ColumnCount.MinimumWidth = 6;
             this.ColumnCount.Name = "ColumnCount";
             this.ColumnCount.ReadOnly = true;
+            // 
+            // buttonSaveToExcel
+            // 
+            this.buttonSaveToExcel.Location = new System.Drawing.Point(13, 13);
+            this.buttonSaveToExcel.Name = "buttonSaveToExcel";
+            this.buttonSaveToExcel.Size = new System.Drawing.Size(244, 29);
+            this.buttonSaveToExcel.TabIndex = 2;
+            this.buttonSaveToExcel.Text = "Сохранить в Excel";
+            this.buttonSaveToExcel.UseVisualStyleBackColor = true;
+            this.buttonSaveToExcel.Click += new System.EventHandler(this.buttonSaveToExcel_Click);
             // 
             // FormReportComponentTravels
             // 
