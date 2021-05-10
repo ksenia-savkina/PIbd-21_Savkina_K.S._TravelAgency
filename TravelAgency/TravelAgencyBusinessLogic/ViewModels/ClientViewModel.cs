@@ -1,5 +1,6 @@
-﻿using System.ComponentModel;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using TravelAgencyBusinessLogic.Attributes;
+using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
@@ -9,16 +10,16 @@ namespace TravelAgencyBusinessLogic.ViewModels
         [DataMember]
         public int Id { get; set; }
 
+        [Column(title: "ФИО", gridViewAutoSize: GridViewAutoSize.Fill)]
         [DataMember]
-        [DisplayName("ФИО")]
         public string ClientFIO { get; set; }
 
+        [Column(title: "Логин", width: 120)]
         [DataMember]
-        [DisplayName("Логин")]
         public string Email { get; set; }
 
+        [Column(title: "Пароль", width: 100)]
         [DataMember]
-        [DisplayName("Пароль")]
         public string Password { get; set; }
     }
 }

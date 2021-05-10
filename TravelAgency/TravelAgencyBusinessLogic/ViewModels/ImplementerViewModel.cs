@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using TravelAgencyBusinessLogic.Attributes;
+using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
@@ -9,13 +10,13 @@ namespace TravelAgencyBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("ФИО исполнителя")]
+        [Column(title: "ФИО исполнителя", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ImplementerFIO { get; set; }
 
-        [DisplayName("Время на заказ")]
+        [Column(title: "Время на заказ", width: 100)]
         public int WorkingTime { get; set; }
 
-        [DisplayName("Время на перерыв")]
+        [Column(title: "Время на перерыв", width: 100)]
         public int PauseTime { get; set; }
     }
 }

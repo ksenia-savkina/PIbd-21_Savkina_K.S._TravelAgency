@@ -1,4 +1,5 @@
-﻿using System.ComponentModel;
+﻿using TravelAgencyBusinessLogic.Attributes;
+using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
@@ -9,7 +10,7 @@ namespace TravelAgencyBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Название компонента")]
+        [Column(title: "Название компонента", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ComponentName { get; set; }
     }
 }
