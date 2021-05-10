@@ -99,6 +99,7 @@ namespace TravelAgencyView
                                 Visible = columnAttr.Visible,
                                 Width = columnAttr.Width
                             };
+                            column.DefaultCellStyle.Format = columnAttr.DateFormat;
                             if (columnAttr.GridViewAutoSize != GridViewAutoSize.None)
                             {
                                 column.AutoSizeMode = (DataGridViewAutoSizeColumnMode)Enum.Parse(typeof(DataGridViewAutoSizeColumnMode), columnAttr.GridViewAutoSize.ToString());

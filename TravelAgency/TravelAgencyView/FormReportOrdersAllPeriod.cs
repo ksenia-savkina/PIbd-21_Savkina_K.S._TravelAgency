@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
@@ -24,7 +25,8 @@ namespace TravelAgencyView
         {
             try
             {
-                var dataSource = logic.GetOrdersAllPeriod();
+                MethodInfo method = logic.GetType().GetMethod("GetOrdersAllPeriod");
+                var dataSource = method.Invoke(logic, new object[] { new ReportBindingModel { } });
                 ReportDataSource source = new ReportDataSource("DataSetOrdersAllPeriod", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
@@ -43,10 +45,8 @@ namespace TravelAgencyView
                 {
                     try
                     {
-                        logic.SaveOrdersAllPeriodToPdfFile(new ReportBindingModel
-                        {
-                            FileName = dialog.FileName
-                        });
+                        MethodInfo method = logic.GetType().GetMethod("SaveOrdersAllPeriodToPdfFile");
+                        method.Invoke(logic, new object[] { new ReportBindingModel { FileName = dialog.FileName } });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)

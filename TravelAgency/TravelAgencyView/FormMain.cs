@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
@@ -92,7 +93,8 @@ namespace TravelAgencyView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveTravelsToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MethodInfo method = report.GetType().GetMethod("SaveTravelsToWordFile");
+                    method.Invoke(report, new object[] { new ReportBindingModel { FileName = dialog.FileName } });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
@@ -172,7 +174,8 @@ namespace TravelAgencyView
             {
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    report.SaveStoreHousesToWordFile(new ReportBindingModel { FileName = dialog.FileName });
+                    MethodInfo method = report.GetType().GetMethod("SaveStoreHousesToWordFile");
+                    method.Invoke(report, new object[] { new ReportBindingModel { FileName = dialog.FileName } });
                     MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }

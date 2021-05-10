@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
+using TravelAgencyBusinessLogic.Attributes;
+using TravelAgencyBusinessLogic.Enums;
 
 namespace TravelAgencyBusinessLogic.ViewModels
 {
@@ -8,13 +9,13 @@ namespace TravelAgencyBusinessLogic.ViewModels
     {
         public int Id { get; set; }
 
-        [DisplayName("Название склада")]
+        [Column(title: "Название склада", width: 120)]
         public string StoreHouseName { get; set; }
 
-        [DisplayName("ФИО ответственного")]
+        [Column(title: "ФИО ответственного", gridViewAutoSize: GridViewAutoSize.Fill)]
         public string ResponsiblePersonFullName { get; set; }
 
-        [DisplayName("Дата создания склада")]
+        [Column(title: "Дата создания склада", dateFormat: "d", width: 130)]
         public DateTime DateCreate { get; set; }
 
         public Dictionary<int, (string, int)> StoreHouseComponents { get; set; }

@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
+using TravelAgencyBusinessLogic.ViewModels;
 using Unity;
 
 namespace TravelAgencyView
@@ -23,7 +26,8 @@ namespace TravelAgencyView
         {
             try
             {
-                var dict = logic.GetComponentStoreHouse();
+                MethodInfo method = logic.GetType().GetMethod("GetComponentStoreHouse");
+                var dict = (List<ReportStoreHouseComponentViewModel>)method.Invoke(logic, new object[] { });
                 if (dict != null)
                 {
                     dataGridView.Rows.Clear();
@@ -53,10 +57,8 @@ namespace TravelAgencyView
                 {
                     try
                     {
-                        logic.SaveComponentStoreHouseToExcelFile(new ReportBindingModel
-                        {
-                            FileName = dialog.FileName
-                        });
+                        MethodInfo method = logic.GetType().GetMethod("SaveComponentStoreHouseToExcelFile");
+                        method.Invoke(logic, new object[] { new ReportBindingModel { FileName = dialog.FileName } });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)

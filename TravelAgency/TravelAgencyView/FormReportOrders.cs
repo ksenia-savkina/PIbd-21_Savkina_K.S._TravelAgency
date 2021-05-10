@@ -1,5 +1,6 @@
 ﻿using Microsoft.Reporting.WinForms;
 using System;
+using System.Reflection;
 using System.Windows.Forms;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
@@ -33,11 +34,12 @@ namespace TravelAgencyView
                 "c " + dateTimePickerFrom.Value.ToShortDateString() +
                 " по " + dateTimePickerTo.Value.ToShortDateString());
                 reportViewer.LocalReport.SetParameters(parameter);
-                var dataSource = logic.GetOrders(new ReportBindingModel
+                MethodInfo method = logic.GetType().GetMethod("GetOrders");
+                var dataSource = method.Invoke(logic, new object[] {new ReportBindingModel
                 {
                     DateFrom = dateTimePickerFrom.Value,
                     DateTo = dateTimePickerTo.Value
-                });
+                } });
                 ReportDataSource source = new ReportDataSource("DataSetOrders", dataSource);
                 reportViewer.LocalReport.DataSources.Add(source);
                 reportViewer.RefreshReport();
@@ -61,12 +63,13 @@ namespace TravelAgencyView
                 {
                     try
                     {
-                        logic.SaveOrdersToPdfFile(new ReportBindingModel
+                        MethodInfo method = logic.GetType().GetMethod("SaveOrdersToPdfFile");
+                        method.Invoke(logic, new object[] { new ReportBindingModel
                         {
                             FileName = dialog.FileName,
                             DateFrom = dateTimePickerFrom.Value,
                             DateTo = dateTimePickerTo.Value
-                        });
+                        } });
                         MessageBox.Show("Выполнено", "Успех", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                     catch (Exception ex)

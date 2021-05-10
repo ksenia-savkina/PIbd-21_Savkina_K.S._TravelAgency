@@ -49,11 +49,11 @@ namespace TravelAgencyBusinessLogic.ViewModels
         [DataMember]
         public OrderStatus Status { get; set; }
 
-        [Column(title: "Дата создания", width: 130)]
+        [Column(title: "Дата создания", dateFormat: "d", width: 130)]
         [DataMember]
         public DateTime DateCreate { get; set; }
 
-        [Column(title: "Дата выполнения", width: 130)]
+        [Column(title: "Дата выполнения", dateFormat: "d", width: 130)]
         [DataMember]
         public DateTime? DateImplement { get; set; }
     }

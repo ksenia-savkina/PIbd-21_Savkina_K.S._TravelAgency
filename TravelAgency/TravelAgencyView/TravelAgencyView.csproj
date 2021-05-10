@@ -360,6 +360,9 @@
     <EmbeddedResource Include="FormReportComponentStoreHouse.resx">
       <DependentUpon>FormReportComponentStoreHouse.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="FormReportComponentTravels.resx">
+      <DependentUpon>FormReportComponentTravels.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormReportOrdersAllPeriod.resx">
       <DependentUpon>FormReportOrdersAllPeriod.cs</DependentUpon>
     </EmbeddedResource>
