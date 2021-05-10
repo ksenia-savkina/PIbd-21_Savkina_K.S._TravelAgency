@@ -13,5 +13,8 @@ namespace TravelAgencyDatabaseImplement.Models
 
         [ForeignKey("ComponentId")]
         public virtual List<TravelComponent> TravelComponents { get; set; }
+
+        [ForeignKey("ComponentId")]
+        public virtual List<StoreHouseComponent> StoreHouseComponents { get; set; }
     }
 }
