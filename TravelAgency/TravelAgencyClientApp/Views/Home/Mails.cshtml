@@ -1,6 +1,6 @@
 ﻿@using TravelAgencyBusinessLogic.ViewModels
 
-@model IndexViewModel
+@model PageViewModel
 @{
     ViewData["Title"] = "Mails";
 }
@@ -54,19 +54,25 @@
     }
 </div>
 
-@if (Model.PageViewModel.HasPreviousPage)
+@if (Model.HasPreviousPage)
 {
     <a asp-action="Mails"
-       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       asp-route-page="@(Model.PageNumber - 1)"
        class="btn btn-outline-dark">
         <i class="glyphicon glyphicon-chevron-left"></i>
         Назад
     </a>
 }
-@if (Model.PageViewModel.HasNextPage)
+
+@for (int i = Model.PageNumber >= 6 ? Model.PageNumber - 5 : 1; i <= Model.TotalPages && i <= Model.PageNumber + 5; ++i)
+{
+    <a asp-action="Mails" asp-route-page="@i">@i </a>
+}
+
+@if (Model.HasNextPage)
 {
     <a asp-action="Mails"
-       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       asp-route-page="@(Model.PageNumber + 1)"
        class="btn btn-outline-dark">
         Вперед
         <i class="glyphicon glyphicon-chevron-right"></i>

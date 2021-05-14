@@ -57,5 +57,16 @@ namespace TravelAgencyRestApi.Controllers
                 throw new Exception($"Пароль должен иметь длину от {_passwordMinLength} до {_passwordMaxLength}, состоять из цифр, букв и небуквенных символов");
             }
         }
+
+        [HttpGet]
+        public PageViewModel GetPage(int pageSize, int page, int clientId)
+        {
+            return new PageViewModel(_mailLogic.Count(), page, pageSize, _mailLogic.GetMessagesForPage(new MessageInfoBindingModel
+            {
+                Page = page,
+                PageSize = pageSize,
+                ClientId = clientId
+            }));
+        }
     }
 }
