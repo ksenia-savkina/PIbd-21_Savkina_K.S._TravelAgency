@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.Interfaces;
 using TravelAgencyBusinessLogic.ViewModels;
@@ -88,29 +87,6 @@ namespace TravelAgencyListImplement.Implements
                 return;
             }
             source.MessagesInfo.Add(CreateModel(model, tempMessageInfo));
-        }
-
-        public int Count()
-        {
-            int k = 0;
-            foreach (var messageInfo in source.MessagesInfo)
-            {
-                k++;
-            }
-            return k;
-        }
-
-        public List<MessageInfoViewModel> GetMessagesForPage(MessageInfoBindingModel model)
-        {
-            List<MessageInfoViewModel> result = new List<MessageInfoViewModel>();
-            foreach (var messageInfo in source.MessagesInfo)
-            {
-                if ((model.ClientId.HasValue && model.ClientId.Value == messageInfo.ClientId) || !model.ClientId.HasValue)
-                {
-                    result.Add(CreateModel(messageInfo));
-                }
-            }
-            return result;
         }
 
         private MessageInfo CreateModel(MessageInfoBindingModel model, MessageInfo messageInfo)
