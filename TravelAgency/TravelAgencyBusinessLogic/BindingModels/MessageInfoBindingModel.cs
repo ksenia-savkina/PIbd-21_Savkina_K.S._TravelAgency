@@ -28,9 +28,9 @@ namespace TravelAgencyBusinessLogic.BindingModels
         public DateTime DateDelivery { get; set; }
 
         [DataMember]
-        public int? PageSize { get; set; }
+        public int? SkippingMessages { get; set; }
 
         [DataMember]
-        public int? Page { get; set; }
+        public int? TakingMessages { get; set; }
     }
 }

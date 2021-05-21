@@ -28,17 +28,45 @@ namespace TravelAgencyListImplement.Implements
 
         public List<MessageInfoViewModel> GetFilteredList(MessageInfoBindingModel model)
         {
+            int takingMessages = model.SkippingMessages ?? 0;
+            int skippingMessages = model.TakingMessages ?? source.MessagesInfo.Count;
             if (model == null)
             {
                 return null;
             }
             List<MessageInfoViewModel> result = new List<MessageInfoViewModel>();
+            if (model.SkippingMessages.HasValue && model.TakingMessages.HasValue && !model.ClientId.HasValue)
+            {
+                foreach (var messageInfo in source.MessagesInfo)
+                {
+                    if (skippingMessages > 0)
+                    {
+                        skippingMessages--;
+                        continue;
+                    }
+                    if (takingMessages > 0)
+                    {
+                        result.Add(CreateModel(messageInfo));
+                        takingMessages--;
+                    }
+                }
+                return result;
+            }
             foreach (var messageInfo in source.MessagesInfo)
             {
                 if ((model.ClientId.HasValue && messageInfo.ClientId == model.ClientId) ||
                 (!model.ClientId.HasValue && messageInfo.DateDelivery.Date == model.DateDelivery.Date))
                 {
-                    result.Add(CreateModel(messageInfo));
+                    if (skippingMessages > 0)
+                    {
+                        skippingMessages--;
+                        continue;
+                    }
+                    if (takingMessages > 0)
+                    {
+                        result.Add(CreateModel(messageInfo));
+                        takingMessages--;
+                    }
                 }
             }
             return result;

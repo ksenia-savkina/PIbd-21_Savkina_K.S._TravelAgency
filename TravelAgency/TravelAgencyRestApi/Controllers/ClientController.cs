@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text.RegularExpressions;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
@@ -20,17 +21,27 @@ namespace TravelAgencyRestApi.Controllers
 
         private readonly int _passwordMinLength = 10;
 
+        private readonly int messagesOnPage = 5;
+
         public ClientController(ClientLogic logic, MailLogic mailLogic)
         {
             _logic = logic;
             _mailLogic = mailLogic;
+            if (messagesOnPage < 1)
+            {
+                messagesOnPage = 5;
+            }
         }
 
         [HttpGet]
         public ClientViewModel Login(string login, string password) => _logic.Read(new ClientBindingModel { Email = login, Password = password })?[0];
 
         [HttpGet]
-        public List<MessageInfoViewModel> GetMessages(int clientId) => _mailLogic.Read(new MessageInfoBindingModel { ClientId = clientId });
+        public (List<MessageInfoViewModel>, bool) GetMessages(int clientId, int page)
+        {
+            var messages = _mailLogic.Read(new MessageInfoBindingModel { ClientId = clientId, SkippingMessages = (page - 1) * messagesOnPage, TakingMessages = messagesOnPage + 1 });
+            return (messages.Take(messagesOnPage).ToList(), !(messages.Count() <= messagesOnPage));
+        }
 
         [HttpPost]
         public void Register(ClientBindingModel model)
@@ -56,17 +67,6 @@ namespace TravelAgencyRestApi.Controllers
             {
                 throw new Exception($"Пароль должен иметь длину от {_passwordMinLength} до {_passwordMaxLength}, состоять из цифр, букв и небуквенных символов");
             }
-        }
-
-        [HttpGet]
-        public PageViewModel GetPage(int pageSize, int page, int clientId)
-        {
-            return new PageViewModel(_mailLogic.Count(), page, pageSize, _mailLogic.GetMessagesForPage(new MessageInfoBindingModel
-            {
-                Page = page,
-                PageSize = pageSize,
-                ClientId = clientId
-            }));
         }
     }
 }

@@ -149,10 +149,9 @@ namespace TravelAgencyClientApp.Controllers
             {
                 return Redirect("~/Home/Enter");
             }
-            int pageSize = 5;
-
-            return View(APIClient.GetRequest<PageViewModel>($"api/client/GetPage?pageSize={pageSize}" +
-               $"&page={page}&ClientId={Program.Client.Id}"));
+            var req = APIClient.GetRequest<(List<MessageInfoViewModel> messages, bool hasNext)>($"api/client/GetMessages?page={page}&clientId={Program.Client.Id}");
+            (List<MessageInfoViewModel>, bool, int) model = (req.messages, req.hasNext, page);
+            return View(model);
         }
     }
 }

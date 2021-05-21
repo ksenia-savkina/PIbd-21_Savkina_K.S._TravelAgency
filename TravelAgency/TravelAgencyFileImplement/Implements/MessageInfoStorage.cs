@@ -30,9 +30,19 @@ namespace TravelAgencyFileImplement.Implements
             {
                 return null;
             }
+            if (model.SkippingMessages.HasValue && model.TakingMessages.HasValue && !model.ClientId.HasValue)
+            {
+                return source.MessagesInfo
+                .Skip((int)model.SkippingMessages)
+                .Take((int)model.TakingMessages)
+                .Select(CreateModel)
+                .ToList();
+            }
             return source.MessagesInfo
             .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
              (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
+            .Skip(model.SkippingMessages ?? 0)
+            .Take(model.TakingMessages ?? source.MessagesInfo.Count())
             .Select(CreateModel)
             .ToList();
         }
@@ -68,26 +78,6 @@ namespace TravelAgencyFileImplement.Implements
                 Subject = messageInfo.Subject,
                 Body = messageInfo.Body
             };
-        }
-
-        public int Count()
-        {
-            return source.MessagesInfo.Count();
-        }
-
-        public List<MessageInfoViewModel> GetMessagesForPage(MessageInfoBindingModel model)
-        {
-            return source.MessagesInfo.Where(rec => (model.ClientId.HasValue &&
-            model.ClientId.Value == rec.ClientId) || !model.ClientId.HasValue)
-            .Skip((model.Page.Value - 1) * model.PageSize.Value).Take(model.PageSize.Value)
-            .ToList().Select(rec => new MessageInfoViewModel
-            {
-                MessageId = rec.MessageId,
-                SenderName = rec.SenderName,
-                DateDelivery = rec.DateDelivery,
-                Subject = rec.Subject,
-                Body = rec.Body
-            }).ToList();
         }
     }
 }
