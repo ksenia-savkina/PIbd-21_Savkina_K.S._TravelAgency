@@ -2,7 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.ViewModels;
 using TravelAgencyClientApp.Models;
@@ -150,20 +149,9 @@ namespace TravelAgencyClientApp.Controllers
             {
                 return Redirect("~/Home/Enter");
             }
-            int pageSize = 5;
-
-            var messages = APIClient.GetRequest<List<MessageInfoViewModel>>($"api/client/getmessages?clientId={Program.Client.Id}");
-            var count = messages.Count();
-            var items = messages.Skip((page - 1) * pageSize).Take(pageSize).ToList();
-
-            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
-            IndexViewModel viewModel = new IndexViewModel
-            {
-                PageViewModel = pageViewModel,
-                Messages = items
-            };
-
-            return View(viewModel);
+            var req = APIClient.GetRequest<(List<MessageInfoViewModel> messages, bool hasNext)>($"api/client/GetMessages?page={page}&clientId={Program.Client.Id}");
+            (List<MessageInfoViewModel>, bool, int) model = (req.messages, req.hasNext, page);
+            return View(model);
         }
     }
 }

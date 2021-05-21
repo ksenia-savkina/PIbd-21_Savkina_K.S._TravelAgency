@@ -32,6 +32,7 @@ namespace TravelAgencyView
             this.dataGridView = new System.Windows.Forms.DataGridView();
             this.buttonNext = new System.Windows.Forms.Button();
             this.buttonPrev = new System.Windows.Forms.Button();
+            this.textBoxPage = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -73,11 +74,20 @@ namespace TravelAgencyView
             this.buttonPrev.UseVisualStyleBackColor = true;
             this.buttonPrev.Click += new System.EventHandler(this.buttonPrev_Click);
             // 
+            // textBoxPage
+            // 
+            this.textBoxPage.Location = new System.Drawing.Point(255, 426);
+            this.textBoxPage.Name = "textBoxPage";
+            this.textBoxPage.ReadOnly = true;
+            this.textBoxPage.Size = new System.Drawing.Size(100, 22);
+            this.textBoxPage.TabIndex = 17;
+            // 
             // FormMails
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(629, 460);
+            this.Controls.Add(this.textBoxPage);
             this.Controls.Add(this.buttonPrev);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.dataGridView);
@@ -86,6 +96,7 @@ namespace TravelAgencyView
             this.Load += new System.EventHandler(this.FormMails_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -94,5 +105,6 @@ namespace TravelAgencyView
         private System.Windows.Forms.DataGridView dataGridView;
         private System.Windows.Forms.Button buttonNext;
         private System.Windows.Forms.Button buttonPrev;
+        private System.Windows.Forms.TextBox textBoxPage;
     }
 }

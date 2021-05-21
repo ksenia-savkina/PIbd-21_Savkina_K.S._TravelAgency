@@ -30,9 +30,19 @@ namespace TravelAgencyFileImplement.Implements
             {
                 return null;
             }
+            if (model.SkippingMessages.HasValue && model.TakingMessages.HasValue && !model.ClientId.HasValue)
+            {
+                return source.MessagesInfo
+                .Skip((int)model.SkippingMessages)
+                .Take((int)model.TakingMessages)
+                .Select(CreateModel)
+                .ToList();
+            }
             return source.MessagesInfo
             .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
              (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
+            .Skip(model.SkippingMessages ?? 0)
+            .Take(model.TakingMessages ?? source.MessagesInfo.Count())
             .Select(CreateModel)
             .ToList();
         }

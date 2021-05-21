@@ -35,9 +35,26 @@ namespace TravelAgencyDatabaseImplement.Implements
             }
             using (var context = new TravelAgencyDatabase())
             {
+                if (model.SkippingMessages.HasValue && model.TakingMessages.HasValue && !model.ClientId.HasValue)
+                {
+                    return context.MessagesInfo
+                    .Skip((int)model.SkippingMessages)
+                    .Take((int)model.TakingMessages)
+                    .Select(rec => new MessageInfoViewModel
+                    {
+                        MessageId = rec.MessageId,
+                        SenderName = rec.SenderName,
+                        DateDelivery = rec.DateDelivery,
+                        Subject = rec.Subject,
+                        Body = rec.Body
+                    })
+                    .ToList();
+                }
                 return context.MessagesInfo
                 .Where(rec => (model.ClientId.HasValue && rec.ClientId == model.ClientId) ||
                 (!model.ClientId.HasValue && rec.DateDelivery.Date == model.DateDelivery.Date))
+                .Skip(model.SkippingMessages ?? 0)
+                .Take(model.TakingMessages ?? context.MessagesInfo.Count())
                 .Select(rec => new MessageInfoViewModel
                 {
                     MessageId = rec.MessageId,

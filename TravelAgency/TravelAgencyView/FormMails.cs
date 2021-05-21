@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Forms;
+using TravelAgencyBusinessLogic.BindingModels;
 using TravelAgencyBusinessLogic.BusinessLogics;
-using TravelAgencyBusinessLogic.ViewModels;
 using Unity;
 
 namespace TravelAgencyView
@@ -14,13 +14,20 @@ namespace TravelAgencyView
 
         private readonly MailLogic logic;
 
-        private readonly IndexViewModel index;
+        private readonly int messagesOnPage = 13;
+
+        private int currentPage = 0;
+
+        private bool hasNext = false;
 
         public FormMails(MailLogic logic)
         {
             InitializeComponent();
             this.logic = logic;
-            index = new IndexViewModel();
+            if (messagesOnPage < 1)
+            {
+                messagesOnPage = 5;
+            }
         }
 
         private void FormMails_Load(object sender, EventArgs e)
@@ -28,17 +35,29 @@ namespace TravelAgencyView
             LoadData();
         }
 
-        private void LoadData(int page = 1)
+        private void LoadData()
         {
             try
             {
-                var list = logic.Read(null);
-                if (list != null)
+                var messages = logic.Read(new MessageInfoBindingModel
                 {
-                    int pageSize = 13;
-                    index.Messages = list.Skip((page - 1) * pageSize).Take(pageSize);
-                    index.PageViewModel = new PageViewModel(list.Count, page, pageSize);
-                    Program.ConfigGrid(index.Messages.ToList(), dataGridView);
+                    SkippingMessages = currentPage * messagesOnPage,
+                    TakingMessages = messagesOnPage + 1
+                });
+                hasNext = !(messages.Count() <= messagesOnPage);
+                if (hasNext)
+                {
+                    buttonNext.Text = "Следующая " + (currentPage + 2);
+                    buttonNext.Enabled = true;
+                }
+                else
+                {
+                    buttonNext.Text = "Следующая";
+                    buttonNext.Enabled = false;
+                }
+                if (messages != null)
+                {
+                    Program.ConfigGrid(messages.Take(messagesOnPage).ToList(), dataGridView);
                 }
             }
             catch (Exception ex)
@@ -49,25 +68,34 @@ namespace TravelAgencyView
 
         private void buttonPrev_Click(object sender, EventArgs e)
         {
-            if (index.PageViewModel.HasPreviousPage)
+            if ((currentPage - 1) >= 0)
             {
-                LoadData(index.PageViewModel.PageNumber - 1);
-            }
-            else
-            {
-                MessageBox.Show("Первая страница", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                currentPage--;
+                textBoxPage.Text = (currentPage + 1).ToString();
+                buttonNext.Enabled = true;
+                buttonNext.Text = "Следующая " + (currentPage + 2);
+                if (currentPage == 0)
+                {
+                    buttonPrev.Enabled = false;
+                    buttonPrev.Text = "Предыдущая";
+                }
+                else
+                {
+                    buttonPrev.Text = "Предыдущая " + (currentPage);
+                }
+                LoadData();
             }
         }
 
         private void buttonNext_Click(object sender, EventArgs e)
         {
-            if (index.PageViewModel.HasNextPage)
+            if (hasNext)
             {
-                LoadData(index.PageViewModel.PageNumber + 1);
-            }
-            else
-            {
-                MessageBox.Show("Последняя страница", "Предупреждение", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                currentPage++;
+                textBoxPage.Text = (currentPage + 1).ToString();
+                buttonPrev.Enabled = true;
+                buttonPrev.Text = "Предыдущая " + (currentPage);
+                LoadData();
             }
         }
     }
